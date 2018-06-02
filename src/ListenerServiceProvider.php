@@ -38,12 +38,7 @@ class ListenerServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__.'/../config/ore.listener.php', 'ore.listener');
         $this->app->register(\Railken\Laravel\Manager\ManagerServiceProvider::class);
         $this->app->register(\Railken\LaraOre\WorkServiceProvider::class);
-        $this->app->register(\Railken\LaraOre\Template\TemplateServiceProvider::class);
-        $this->app->register(\TwigBridge\ServiceProvider::class);
-        $this->app->register(\Barryvdh\DomPDF\ServiceProvider::class);
-
-            
-        
+        $this->app->register(\Railken\LaraOre\TemplateServiceProvider::class);
 
         Event::listen(Config::get('ore.listener.events'), function ($event_name, $events) {
             $lm = new ListenerManager();
@@ -52,7 +47,6 @@ class ListenerServiceProvider extends ServiceProvider
 
             foreach ($listeners as $listener) {
                 foreach ($events as $event) {
-                    print_r($event->data);
                     $wm->dispatch($listener->work, $event->data);
                 }
             }

@@ -12,13 +12,6 @@ abstract class BaseTest extends \Orchestra\Testbench\TestCase
             \Railken\LaraOre\ListenerServiceProvider::class,
         ];
     }
-    
-    protected function getPackageAliases($app)
-    {
-        return [
-            'Twig' => \TwigBridge\Facade\Twig::class,
-        ];
-    }
 
     /**
      * Setup the test environment.
@@ -47,7 +40,7 @@ abstract class BaseTest extends \Orchestra\Testbench\TestCase
         ]);
 
         $this->artisan('vendor:publish', [
-            '--provider' => 'Railken\LaraOre\Template\TemplateServiceProvider',
+            '--provider' => 'Railken\LaraOre\TemplateServiceProvider',
             '--force' => true
         ]);
 
