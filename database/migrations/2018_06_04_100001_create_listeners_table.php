@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Config;
 
 class CreateListenersTable extends Migration
 {
@@ -13,7 +14,7 @@ class CreateListenersTable extends Migration
      */
     public function up()
     {
-        Schema::create('ore_listeners', function (Blueprint $table) {
+        Schema::create(Config::get('ore.listener.table'), function (Blueprint $table) {
             $table->increments('id'); 
             $table->string('name'); 
             $table->text('description')->nullable(); 
@@ -32,6 +33,6 @@ class CreateListenersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ore_listeners');
+        Schema::dropIfExists(Config::get('ore.listener.table'));
     }
 }

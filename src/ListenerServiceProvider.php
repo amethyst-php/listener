@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Event;
 use Railken\LaraOre\Listener\ListenerManager;
 use Railken\LaraOre\Work\WorkManager;
 use Illuminate\Support\Facades\Config;
+use Railken\LaraOre\Api\Support\Router;
 
 class ListenerServiceProvider extends ServiceProvider
 {
@@ -21,11 +22,12 @@ class ListenerServiceProvider extends ServiceProvider
             __DIR__.'/../config/ore.listener.php' => config_path('ore.listener.php'),
         ], 'config');
 
-        if (!class_exists('CreateListenersTable')) {
-            $this->publishes([
-                __DIR__.'/../database/migrations/create_listeners_table.php.stub' => database_path('migrations/'.(new \DateTime())->format("Y_m_d_His.u").'_create_listeners_table.php'),
-            ], 'migrations');
-        }
+        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+        $this->loadRoutes();
+
+        config(['ore.user.permission.managers' => array_merge(Config::get('ore.user.permission.managers'), [
+            \Railken\LaraOre\Listener\ListenerManager::class,
+        ])]);
     }
 
     /**
@@ -37,6 +39,8 @@ class ListenerServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(__DIR__.'/../config/ore.listener.php', 'ore.listener');
         $this->app->register(\Railken\Laravel\Manager\ManagerServiceProvider::class);
+        $this->app->register(\Railken\LaraOre\ApiServiceProvider::class);
+        $this->app->register(\Railken\LaraOre\UserServiceProvider::class);
         $this->app->register(\Railken\LaraOre\WorkServiceProvider::class);
         $this->app->register(\Railken\LaraOre\TemplateServiceProvider::class);
 
@@ -50,6 +54,24 @@ class ListenerServiceProvider extends ServiceProvider
                     $wm->dispatch($listener->work, $event->data);
                 }
             }
+        });
+    }
+
+    /**
+    * Load routes.
+    *
+    * @return void
+    */
+    public function loadRoutes()
+    {
+        Router::group(array_merge(Config::get('ore.listener.router'), [
+            'namespace' => 'Railken\LaraOre\Http\Controllers',
+        ]), function ($router) {
+            $router->get('/', ['uses' => 'ListenersController@index']);
+            $router->post('/', ['uses' => 'ListenersController@create']);
+            $router->put('/{id}', ['uses' => 'ListenersController@update']);
+            $router->delete('/{id}', ['uses' => 'ListenersController@remove']);
+            $router->get('/{id}', ['uses' => 'ListenersController@show']);
         });
     }
 }

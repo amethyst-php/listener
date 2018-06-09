@@ -7,7 +7,10 @@
         "railken/bag": "^1.2",
         "railken/laravel-manager": "^3.1",
         "guzzlehttp/guzzle": "^6.3",
-        "railken/lara-ore-work": "dev-master"
+        "railken/lara-ore-work": "dev-master",
+        "railken/lara-ore-api": "dev-master",
+        "railken/lara-ore-support": "dev-master",
+        "railken/lara-ore-user": "dev-master"
     },
     "require-dev": {
         "phpunit/phpunit": "~7.0",
