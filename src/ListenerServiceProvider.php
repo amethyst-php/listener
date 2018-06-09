@@ -2,12 +2,12 @@
 
 namespace Railken\LaraOre;
 
-use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\ServiceProvider;
+use Railken\LaraOre\Api\Support\Router;
 use Railken\LaraOre\Listener\ListenerManager;
 use Railken\LaraOre\Work\WorkManager;
-use Illuminate\Support\Facades\Config;
-use Railken\LaraOre\Api\Support\Router;
 
 class ListenerServiceProvider extends ServiceProvider
 {
@@ -58,10 +58,10 @@ class ListenerServiceProvider extends ServiceProvider
     }
 
     /**
-    * Load routes.
-    *
-    * @return void
-    */
+     * Load routes.
+     *
+     * @return void
+     */
     public function loadRoutes()
     {
         Router::group(array_merge(Config::get('ore.listener.router'), [

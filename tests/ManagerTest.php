@@ -10,7 +10,6 @@ class ManagerTest extends BaseTest
 {
     use ManagerTestableTrait;
 
-
     /**
      * Retrieve basic url.
      *
@@ -33,9 +32,9 @@ class ManagerTest extends BaseTest
         event(new DummyEvent([
             'user' => [
                 'email' => 'test@test.net',
-                'name' => '024',
+                'name'  => '024',
             ],
-            'message' => 'El. psy. congroo.'
+            'message' => 'El. psy. congroo.',
         ]));
     }
 }

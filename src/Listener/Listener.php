@@ -3,9 +3,9 @@
 namespace Railken\LaraOre\Listener;
 
 use Illuminate\Database\Eloquent\Model;
-use Railken\Laravel\Manager\Contracts\EntityContract;
 use Illuminate\Support\Facades\Config;
 use Railken\LaraOre\Work\Work;
+use Railken\Laravel\Manager\Contracts\EntityContract;
 
 class Listener extends Model implements EntityContract
 {

@@ -14,7 +14,7 @@ class ListenerManager extends ModelManager
      * @var string
      */
     public $entity = Listener::class;
-    
+
     /**
      * List of all attributes.
      *

@@ -6,7 +6,6 @@ use Railken\Laravel\Manager\ModelRepository;
 
 class ListenerRepository extends ModelRepository
 {
-
     /**
      * Find a listener given a event_class.
      *
