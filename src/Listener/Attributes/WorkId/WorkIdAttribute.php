@@ -5,7 +5,6 @@ namespace Railken\LaraOre\Listener\Attributes\WorkId;
 use Railken\Laravel\Manager\Attributes\BelongsToAttribute;
 use Railken\Laravel\Manager\Contracts\EntityContract;
 use Railken\Laravel\Manager\Tokens;
-use Respect\Validation\Validator as v;
 
 class WorkIdAttribute extends BelongsToAttribute
 {
@@ -22,7 +21,6 @@ class WorkIdAttribute extends BelongsToAttribute
      *
      * @var bool
      */
-    
     protected $required = true;
 
     /**
@@ -51,7 +49,7 @@ class WorkIdAttribute extends BelongsToAttribute
         Tokens::PERMISSION_FILL => 'listener.attributes.work_id.fill',
         Tokens::PERMISSION_SHOW => 'listener.attributes.work_id.show',
     ];
-    
+
     /**
      * Retrieve the name of the relation.
      *

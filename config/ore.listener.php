@@ -13,14 +13,14 @@ return [
     'table' => 'ore_listeners',
 
     'events' => [
-    	'Railken\LaraOre*'
+        'Railken\LaraOre*',
     ],
 
     'router' => [
-        'prefix' => 'admin/listeners',
+        'prefix'      => 'admin/listeners',
         'middlewares' => [
             \Railken\LaraOre\RequestLoggerMiddleware::class,
             'auth:api',
-        ]
-    ]
+        ],
+    ],
 ];
