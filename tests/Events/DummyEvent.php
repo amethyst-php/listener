@@ -2,21 +2,6 @@
 
 namespace Railken\LaraOre\Listener\Tests\Events;
 
-use Illuminate\Queue\SerializesModels;
-
-class DummyEvent
+class DummyEvent extends \Railken\LaraOre\Listener\Events\BaseEvent
 {
-    use SerializesModels;
-
-    public $data;
-
-    /**
-     * @param array $data
-     *
-     * @return void
-     */
-    public function __construct(array $data)
-    {
-        $this->data = $data;
-    }
 }
