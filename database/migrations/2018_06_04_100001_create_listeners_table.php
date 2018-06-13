@@ -19,6 +19,7 @@ class CreateListenersTable extends Migration
             $table->string('name'); 
             $table->string('condition')->default("1");
             $table->text('description')->nullable(); 
+            $table->boolean('entities')->default(0); 
             $table->text('event_class'); 
             $table->integer('work_id')->unsigned()->nullable(); 
             $table->foreign('work_id')->references('id')->on('ore_works'); 

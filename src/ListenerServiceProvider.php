@@ -55,7 +55,7 @@ class ListenerServiceProvider extends ServiceProvider
             foreach ($listeners as $listener) {
                 foreach ($events as $event) {
                     $condition = $tm->renderRaw('text/plain', $listener->condition, $event->data);
-                    $condition === "1" && $wm->dispatch($listener->work, $event->data, isset($event->entities) ? $event->entities : []);
+                    $condition === "1" && $wm->dispatch($listener->work, $event->data, $listener->entities && isset($event->entities) ? $event->entities : []);
                 }
             }
         });

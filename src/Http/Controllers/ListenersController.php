@@ -20,6 +20,7 @@ class ListenersController extends RestController
         'event_class',
         'condition',
         'work_id',
+        'entities',
         'created_at',
         'updated_at',
     ];
@@ -29,6 +30,7 @@ class ListenersController extends RestController
         'event_class',
         'condition',
         'work_id',
+        'entities',
     ];
 
     /**

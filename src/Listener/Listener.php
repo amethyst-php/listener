@@ -28,6 +28,7 @@ class Listener extends Model implements EntityContract
         'work_id',
         'enabled',
         'condition',
+        'entities',
     ];
 
     /**
