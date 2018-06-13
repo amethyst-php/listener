@@ -29,6 +29,7 @@ class ListenerManager extends ModelManager
         Attributes\EventClass\EventClassAttribute::class,
         Attributes\Enabled\EnabledAttribute::class,
         Attributes\WorkId\WorkIdAttribute::class,
+        Attributes\Condition\ConditionAttribute::class,
     ];
 
     /**

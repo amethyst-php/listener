@@ -18,6 +18,7 @@ class ListenersController extends RestController
         'id',
         'name',
         'event_class',
+        'condition',
         'work_id',
         'created_at',
         'updated_at',
@@ -26,6 +27,7 @@ class ListenersController extends RestController
     protected static $fillable = [
         'name',
         'event_class',
+        'condition',
         'work_id',
     ];
 
