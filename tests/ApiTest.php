@@ -2,8 +2,8 @@
 
 namespace Railken\LaraOre\Listener\Tests;
 
-use Railken\LaraOre\Support\Testing\ApiTestableTrait;
 use Illuminate\Support\Facades\Config;
+use Railken\LaraOre\Support\Testing\ApiTestableTrait;
 
 class ApiTest extends BaseTest
 {
