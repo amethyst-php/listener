@@ -2,13 +2,13 @@
 
 namespace Railken\LaraOre;
 
-use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\Event;
-use Railken\LaraOre\Listener\ListenerManager;
-use Railken\LaraOre\Work\WorkManager;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Event;
+use Illuminate\Support\ServiceProvider;
 use Railken\LaraOre\Api\Support\Router;
+use Railken\LaraOre\Listener\ListenerManager;
 use Railken\LaraOre\Template\TemplateManager;
+use Railken\LaraOre\Work\WorkManager;
 
 class ListenerServiceProvider extends ServiceProvider
 {
@@ -55,17 +55,17 @@ class ListenerServiceProvider extends ServiceProvider
             foreach ($listeners as $listener) {
                 foreach ($events as $event) {
                     $condition = $tm->renderRaw('text/plain', $listener->condition, $event->data);
-                    $condition === "1" && $wm->dispatch($listener->work, $event->data, $listener->entities && isset($event->entities) ? $event->entities : []);
+                    $condition === '1' && $wm->dispatch($listener->work, $event->data, $listener->entities && isset($event->entities) ? $event->entities : []);
                 }
             }
         });
     }
 
     /**
-    * Load routes.
-    *
-    * @return void
-    */
+     * Load routes.
+     *
+     * @return void
+     */
     public function loadRoutes()
     {
         Router::group(array_merge(Config::get('ore.listener.router'), [
