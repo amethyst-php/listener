@@ -14,7 +14,7 @@ class ListenersController extends RestController
     use RestTraits\RestShowTrait;
     use RestTraits\RestRemoveTrait;
 
-    protected static $query = [
+    public $queryable = [
         'id',
         'name',
         'event_class',
@@ -25,7 +25,7 @@ class ListenersController extends RestController
         'updated_at',
     ];
 
-    protected static $fillable = [
+    public $fillable = [
         'name',
         'event_class',
         'condition',

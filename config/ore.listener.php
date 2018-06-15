@@ -17,7 +17,7 @@ return [
     ],
 
     'router' => [
-        'prefix'      => 'admin/listeners',
+        'prefix'      => '/admin/listeners',
         'middlewares' => [
             \Railken\LaraOre\RequestLoggerMiddleware::class,
             'auth:api',
