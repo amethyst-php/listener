@@ -21,6 +21,7 @@ class ListenersController extends RestController
         'condition',
         'work_id',
         'entities',
+        'enabled',
         'created_at',
         'updated_at',
     ];
@@ -31,6 +32,7 @@ class ListenersController extends RestController
         'condition',
         'work_id',
         'entities',
+        'enabled',
     ];
 
     /**

@@ -15,6 +15,6 @@ class ListenerRepository extends ModelRepository
      */
     public function findByEventClass($event_class)
     {
-        return $this->newQuery()->where('event_class', $event_class)->get();
+        return $this->newQuery()->where('event_class', $event_class)->where('enabled', 1)->get();
     }
 }
