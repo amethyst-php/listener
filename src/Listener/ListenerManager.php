@@ -5,6 +5,7 @@ namespace Railken\LaraOre\Listener;
 use Railken\Laravel\Manager\Contracts\AgentContract;
 use Railken\Laravel\Manager\ModelManager;
 use Railken\Laravel\Manager\Tokens;
+use Illuminate\Support\Facades\Config;
 
 class ListenerManager extends ModelManager
 {
@@ -14,7 +15,7 @@ class ListenerManager extends ModelManager
      * @var string
      */
     public $entity = Listener::class;
-
+    
     /**
      * List of all attributes.
      *
@@ -49,10 +50,20 @@ class ListenerManager extends ModelManager
      */
     public function __construct(AgentContract $agent = null)
     {
-        $this->setRepository(new ListenerRepository($this));
-        $this->setSerializer(new ListenerSerializer($this));
-        $this->setValidator(new ListenerValidator($this));
-        $this->setAuthorizer(new ListenerAuthorizer($this));
+        $this->entity = Config::get('ore.listener.entity');
+        $this->attributes = array_merge($this->attributes, array_values(Config::get('ore.listener.attributes')));
+        
+        $classRepository = Config::get('ore.listener.repository');
+        $this->setRepository(new $classRepository($this));
+
+        $classSerializer = Config::get('ore.listener.serializer');
+        $this->setSerializer(new $classSerializer($this));
+
+        $classAuthorizer = Config::get('ore.listener.authorizer');
+        $this->setAuthorizer(new $classAuthorizer($this));
+
+        $classValidator = Config::get('ore.listener.validator');
+        $this->setValidator(new $classValidator($this));
 
         parent::__construct($agent);
     }

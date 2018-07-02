@@ -4,7 +4,7 @@ namespace Railken\LaraOre\Listener\Tests;
 
 use Illuminate\Support\Facades\File;
 use Railken\Bag;
-use Railken\LaraOre\Work\WorkManager;
+use Railken\LaraOre\Work\WorkFaker;
 
 abstract class BaseTest extends \Orchestra\Testbench\TestCase
 {
@@ -14,28 +14,6 @@ abstract class BaseTest extends \Orchestra\Testbench\TestCase
             \Railken\LaraOre\WorkServiceProvider::class,
             \Railken\LaraOre\ListenerServiceProvider::class,
         ];
-    }
-
-    public function newWork()
-    {
-        $bag = new Bag();
-        $bag->set('name', 'El. psy. congroo. '.microtime(true));
-        $bag->set('worker', 'Railken\LaraOre\Workers\EmailWorker');
-        $bag->set('extra', [
-            'to'      => '{{ user.email }}',
-            'subject' => 'Welcome to the laboratory lab {{ user.name }}',
-            'body'    => '{{ message }}',
-        ]);
-        $bag->set('mock_data', [
-            'user' => [
-                'email' => 'foo@foo.net'
-            ],
-            'message' => 'Hello'
-        ]);
-
-        $wm = new WorkManager();
-
-        return $wm->create($bag)->getResource();
     }
 
     /**
@@ -48,9 +26,9 @@ abstract class BaseTest extends \Orchestra\Testbench\TestCase
         $bag = new bag();
         $bag->set('name', 'El. psy. congroo. '.microtime(true));
         $bag->set('condition', '{{ message is not empty ? 1 : 0 }}');
-        $bag->set('work_id', $this->newWork()->id);
+        $bag->set('work', WorkFaker::make()->toArray());
         $bag->set('event_class', 'Dummy');
-
+        
         return $bag;
     }
 
@@ -64,15 +42,6 @@ abstract class BaseTest extends \Orchestra\Testbench\TestCase
 
         parent::setUp();
 
-        File::cleanDirectory(database_path('migrations/'));
-
         $this->artisan('migrate:fresh');
-
-        $this->artisan('vendor:publish', [
-            '--provider' => 'Railken\LaraOre\ListenerServiceProvider',
-            '--force'    => true,
-        ]);
-
-        $this->artisan('migrate');
     }
 }

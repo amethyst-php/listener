@@ -1,12 +1,12 @@
 <?php
 
-namespace Railken\LaraOre\Http\Controllers;
+namespace Railken\LaraOre\Http\Controllers\Admin;
 
-use Railken\LaraOre\Api\Http\Controllers\RestController;
+use Railken\LaraOre\Api\Http\Controllers\RestConfigurableController;
 use Railken\LaraOre\Api\Http\Controllers\Traits as RestTraits;
 use Railken\LaraOre\Listener\ListenerManager;
 
-class ListenersController extends RestController
+class ListenersController extends RestConfigurableController
 {
     use RestTraits\RestIndexTrait;
     use RestTraits\RestCreateTrait;
@@ -14,6 +14,18 @@ class ListenersController extends RestController
     use RestTraits\RestShowTrait;
     use RestTraits\RestRemoveTrait;
 
+    /**
+     * The config path
+     *
+     * @var string
+     */
+    public $config = 'ore.listener';
+
+    /**
+     * The attributes that are queryable.
+     *
+     * @var array
+     */
     public $queryable = [
         'id',
         'name',
@@ -26,32 +38,18 @@ class ListenersController extends RestController
         'updated_at',
     ];
 
+    /**
+     * The attributes that are fillable.
+     *
+     * @var array
+     */
     public $fillable = [
         'name',
         'event_class',
         'condition',
         'work_id',
+        'work',
         'entities',
         'enabled',
     ];
-
-    /**
-     * Construct.
-     */
-    public function __construct(ListenerManager $manager)
-    {
-        $this->manager = $manager;
-        $this->manager->setAgent($this->getUser());
-        parent::__construct();
-    }
-
-    /**
-     * Create a new instance for query.
-     *
-     * @return \Illuminate\Database\Query\Builder
-     */
-    public function getQuery()
-    {
-        return $this->manager->repository->getQuery();
-    }
 }

@@ -48,8 +48,11 @@ class ListenerServiceProvider extends ServiceProvider
             $lm = new ListenerManager();
             $wm = new WorkManager();
             $tm = new TemplateManager();
+                
+            /** @var \Railken\LaraOre\Listener\ListenerRepository */
+            $repository = $lm->getRepository();
 
-            $listeners = $lm->getRepository()->findByEventClass($event_name);
+            $listeners = $repository->findByEventClass($event_name);
 
             foreach ($listeners as $listener) {
                 foreach ($events as $event) {
@@ -67,14 +70,14 @@ class ListenerServiceProvider extends ServiceProvider
      */
     public function loadRoutes()
     {
-        Router::group(array_merge(Config::get('ore.listener.router'), [
-            'namespace' => 'Railken\LaraOre\Http\Controllers',
-        ]), function ($router) {
-            $router->get('/', ['uses' => 'ListenersController@index']);
-            $router->post('/', ['uses' => 'ListenersController@create']);
-            $router->put('/{id}', ['uses' => 'ListenersController@update']);
-            $router->delete('/{id}', ['uses' => 'ListenersController@remove']);
-            $router->get('/{id}', ['uses' => 'ListenersController@show']);
+        Router::group(Config::get('ore.listener.http.router'), function ($router) {
+            $controller = Config::get('ore.listener.http.controller');
+            
+            $router->get('/', ['uses' => $controller . '@index']);
+            $router->post('/', ['uses' => $controller . '@create']);
+            $router->put('/{id}', ['uses' => $controller . '@update']);
+            $router->delete('/{id}', ['uses' => $controller . '@remove']);
+            $router->get('/{id}', ['uses' => $controller . '@show']);
         });
     }
 }

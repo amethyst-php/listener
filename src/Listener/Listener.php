@@ -39,7 +39,8 @@ class Listener extends Model implements EntityContract
     public function __construct(array $attributes = [])
     {
         parent::__construct($attributes);
-        $this->table = Config::get('ore.listener.table');
+        $this->table = \Illuminate\Support\Facades\Config::get('ore.listener.table');
+        $this->fillable = array_merge($this->fillable, array_keys(Config::get('ore.listener.attributes')));
     }
 
     /**
