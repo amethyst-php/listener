@@ -41,7 +41,6 @@ class ListenerServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__.'/../config/ore.listener.php', 'ore.listener');
         $this->app->register(\Railken\Laravel\Manager\ManagerServiceProvider::class);
         $this->app->register(\Railken\LaraOre\ApiServiceProvider::class);
-        $this->app->register(\Railken\LaraOre\UserServiceProvider::class);
         $this->app->register(\Railken\LaraOre\WorkServiceProvider::class);
         $this->app->register(\Railken\LaraOre\TemplateServiceProvider::class);
 
