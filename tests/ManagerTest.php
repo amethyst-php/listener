@@ -5,14 +5,13 @@ namespace Railken\LaraOre\Listener\Tests;
 use Railken\LaraOre\Listener\ListenerManager;
 use Railken\LaraOre\Listener\Tests\Events\DummyEvent;
 use Railken\LaraOre\Support\Testing\ManagerTestableTrait;
+use Railken\LaraOre\Listener\ListenerFaker;
 
 class ManagerTest extends BaseTest
 {
     use ManagerTestableTrait;
 
     /**
-     * Retrieve basic url.
-     *
      * @return \Railken\Laravel\Manager\Contracts\ManagerContract
      */
     public function getManager()
@@ -22,12 +21,12 @@ class ManagerTest extends BaseTest
 
     public function testSuccessCommon()
     {
-        $this->commonTest($this->getManager(), $this->getParameters());
+        $this->commonTest($this->getManager(), ListenerFaker::make());
     }
 
     public function testWork()
     {
-        $this->getManager()->create($this->getParameters()->set('event_class', DummyEvent::class))->getResource();
+        $this->getManager()->create(ListenerFaker::make()->set('event_class', DummyEvent::class))->getResource();
 
         event(new DummyEvent([
             'user' => [

@@ -5,8 +5,8 @@
     "require": {
         "php": ">=7.1",
         "railken/bag": "^1.2",
+        "fzaninotto/faker": "^1.7",
         "railken/laravel-manager": "^3.1",
-        "guzzlehttp/guzzle": "^6.3",
         "railken/lara-ore-work": "dev-master",
         "railken/lara-ore-api": "dev-master",
         "railken/lara-ore-support": "dev-master",
