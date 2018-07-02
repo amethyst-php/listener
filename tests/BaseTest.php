@@ -26,6 +26,12 @@ abstract class BaseTest extends \Orchestra\Testbench\TestCase
             'subject' => 'Welcome to the laboratory lab {{ user.name }}',
             'body'    => '{{ message }}',
         ]);
+        $bag->set('mock_data', [
+            'user' => [
+                'email' => 'foo@foo.net'
+            ],
+            'message' => 'Hello'
+        ]);
 
         $wm = new WorkManager();
 

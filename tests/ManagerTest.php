@@ -27,7 +27,7 @@ class ManagerTest extends BaseTest
 
     public function testWork()
     {
-        $work = $this->getManager()->create($this->getParameters()->set('event_class', DummyEvent::class))->getResource();
+        $this->getManager()->create($this->getParameters()->set('event_class', DummyEvent::class))->getResource();
 
         event(new DummyEvent([
             'user' => [
