@@ -21,12 +21,12 @@ class ManagerTest extends BaseTest
 
     public function testSuccessCommon()
     {
-        $this->commonTest($this->getManager(), ListenerFaker::make());
+        $this->commonTest($this->getManager(), ListenerFaker::make()->parameters());
     }
 
     public function testWork()
     {
-        $this->getManager()->create(ListenerFaker::make()->set('event_class', DummyEvent::class))->getResource();
+        $this->getManager()->create(ListenerFaker::make()->parameters()->set('event_class', DummyEvent::class))->getResource();
 
         event(new DummyEvent([
             'user' => [
