@@ -1,10 +1,10 @@
 <?php
 
-namespace Railken\LaraOre\Listener\Events;
+namespace Railken\LaraOre\Events;
 
 use Illuminate\Queue\SerializesModels;
 
-class BaseEvent
+class WorkBaseEvent
 {
     use SerializesModels;
 
@@ -19,5 +19,21 @@ class BaseEvent
     {
         $this->data = $data;
         $this->entities = $entities;
+    }
+
+    /**
+     * @return array
+     */
+    public function getData()
+    {
+        return $this->data;
+    }
+
+    /**
+     * @return array
+     */
+    public function getEntities()
+    {
+        return $this->data;
     }
 }

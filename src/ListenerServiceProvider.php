@@ -14,8 +14,6 @@ class ListenerServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap any application services.
-     *
-     * @return void
      */
     public function boot()
     {
@@ -33,8 +31,6 @@ class ListenerServiceProvider extends ServiceProvider
 
     /**
      * Register bindings in the container.
-     *
-     * @return void
      */
     public function register()
     {
@@ -48,7 +44,7 @@ class ListenerServiceProvider extends ServiceProvider
             $lm = new ListenerManager();
             $wm = new WorkManager();
             $tm = new TemplateManager();
-                
+
             /** @var \Railken\LaraOre\Listener\ListenerRepository */
             $repository = $lm->getRepository();
 
@@ -67,19 +63,17 @@ class ListenerServiceProvider extends ServiceProvider
 
     /**
      * Load routes.
-     *
-     * @return void
      */
     public function loadRoutes()
     {
         Router::group(Config::get('ore.listener.http.router'), function ($router) {
             $controller = Config::get('ore.listener.http.controller');
-            
-            $router->get('/', ['uses' => $controller . '@index']);
-            $router->post('/', ['uses' => $controller . '@create']);
-            $router->put('/{id}', ['uses' => $controller . '@update']);
-            $router->delete('/{id}', ['uses' => $controller . '@remove']);
-            $router->get('/{id}', ['uses' => $controller . '@show']);
+
+            $router->get('/', ['uses' => $controller.'@index']);
+            $router->post('/', ['uses' => $controller.'@create']);
+            $router->put('/{id}', ['uses' => $controller.'@update']);
+            $router->delete('/{id}', ['uses' => $controller.'@remove']);
+            $router->get('/{id}', ['uses' => $controller.'@show']);
         });
     }
 }
