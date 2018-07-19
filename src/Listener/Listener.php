@@ -32,6 +32,15 @@ class Listener extends Model implements EntityContract
     ];
 
     /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'enabled' => 'boolean',
+    ];
+
+    /**
      * Creates a new instance of the model.
      *
      * @param array $attributes
