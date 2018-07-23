@@ -2,10 +2,10 @@
 
 namespace Railken\LaraOre\Listener\Tests;
 
+use Railken\LaraOre\Listener\ListenerFaker;
 use Railken\LaraOre\Listener\ListenerManager;
 use Railken\LaraOre\Listener\Tests\Events\DummyEvent;
 use Railken\LaraOre\Support\Testing\ManagerTestableTrait;
-use Railken\LaraOre\Listener\ListenerFaker;
 
 class ManagerTest extends BaseTest
 {

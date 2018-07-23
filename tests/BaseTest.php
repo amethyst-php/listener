@@ -2,17 +2,8 @@
 
 namespace Railken\LaraOre\Listener\Tests;
 
-use Illuminate\Support\Facades\File;
-
 abstract class BaseTest extends \Orchestra\Testbench\TestCase
 {
-    protected function getPackageProviders($app)
-    {
-        return [
-            \Railken\LaraOre\ListenerServiceProvider::class,
-        ];
-    }
-
     /**
      * Setup the test environment.
      */
@@ -24,5 +15,12 @@ abstract class BaseTest extends \Orchestra\Testbench\TestCase
         parent::setUp();
 
         $this->artisan('migrate:fresh');
+    }
+
+    protected function getPackageProviders($app)
+    {
+        return [
+            \Railken\LaraOre\ListenerServiceProvider::class,
+        ];
     }
 }
