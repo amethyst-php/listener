@@ -107,7 +107,7 @@ return [
             'enabled'    => true,
             'controller' => Railken\LaraOre\Http\Controllers\Admin\ListenersController::class,
             'router'     => [
-                'prefix'      => '/admin/files',
+                'prefix'      => '/admin/listeners',
             ],
         ],
     ],
