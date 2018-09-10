@@ -8,13 +8,12 @@ class DummyEvent
 {
     use SerializesModels;
 
-	public $data;
+    public $data;
 
-	/**
+    /**
      * Create a new event instance.
      *
-     * @param  \App\Order  $order
-     * @return void
+     * @param \App\Order $order
      */
     public function __construct(array $data)
     {

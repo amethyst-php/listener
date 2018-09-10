@@ -31,7 +31,7 @@ class ListenersController extends RestConfigurableController
         'event_class',
         'condition',
         'work_id',
-        'entities',
+        'data',
         'enabled',
         'created_at',
         'updated_at',
@@ -47,8 +47,8 @@ class ListenersController extends RestConfigurableController
         'event_class',
         'condition',
         'work_id',
+        'data',
         'work',
-        'entities',
         'enabled',
     ];
 }

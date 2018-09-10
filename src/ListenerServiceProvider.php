@@ -5,15 +5,15 @@ namespace Railken\LaraOre;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 use Railken\LaraOre\Api\Support\Router;
 use Railken\LaraOre\Listener\ListenerManager;
 use Railken\LaraOre\Template\TemplateManager;
 use Railken\LaraOre\Work\WorkManager;
-use Illuminate\Support\Facades\Schema;
 
 class ListenerServiceProvider extends ServiceProvider
-{   
+{
     public $events = [];
 
     /**
@@ -31,20 +31,16 @@ class ListenerServiceProvider extends ServiceProvider
         config(['ore.managers' => array_merge(Config::get('ore.managers', []), [
             \Railken\LaraOre\Listener\ListenerManager::class,
         ])]);
-        
 
         if (Schema::hasTable(Config::get('ore.listener.table'))) {
-            
             $lm = new ListenerManager();
 
             $available = $lm->getAvailableEventClasses();
 
             Event::listen(Config::get('ore.listener.events'), function ($event_name, $events) use ($available) {
-
                 if (!in_array($event_name, $available)) {
                     return true;
                 }
-
 
                 $lm = new ListenerManager();
                 $wm = new WorkManager();
@@ -56,12 +52,10 @@ class ListenerServiceProvider extends ServiceProvider
                 $listeners = $repository->findByEventClass($event_name);
 
                 foreach ($listeners as $listener) {
-
                     foreach ($events as $event) {
-                        
                         $condition = $tm->renderRaw('text/plain', $listener->condition, $event->data);
 
-                        $data = array_merge($event->data, (array) json_decode($tm->renderRaw('text/plain', json_encode($listener->data), $event->data)));
+                        $data = array_merge($event->data, (array) json_decode($tm->renderRaw('text/plain', (string) json_encode($listener->data), $event->data)));
 
                         if ($condition === '1') {
                             $wm->dispatch($listener->work, $data);
@@ -84,8 +78,6 @@ class ListenerServiceProvider extends ServiceProvider
         $this->app->register(\Railken\LaraOre\ApiServiceProvider::class);
         $this->app->register(\Railken\LaraOre\WorkServiceProvider::class);
         $this->app->register(\Railken\LaraOre\TemplateServiceProvider::class);
-
-
     }
 
     /**

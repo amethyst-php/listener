@@ -5,7 +5,6 @@ namespace Railken\LaraOre\Listener\Attributes\Data;
 use Railken\Laravel\Manager\Attributes\BaseAttribute;
 use Railken\Laravel\Manager\Contracts\EntityContract;
 use Railken\Laravel\Manager\Tokens;
-use Respect\Validation\Validator as v;
 
 class DataAttribute extends BaseAttribute
 {
@@ -55,7 +54,7 @@ class DataAttribute extends BaseAttribute
      * Is a value valid ?
      *
      * @param \Railken\Laravel\Manager\Contracts\EntityContract $entity
-     * @param mixed          $value
+     * @param mixed                                             $value
      *
      * @return bool
      */

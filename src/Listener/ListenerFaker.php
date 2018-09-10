@@ -26,7 +26,7 @@ class ListenerFaker extends BaseFaker
         $bag->set('condition', '{{ message is not empty ? 1 : 0 }}');
         $bag->set('work', WorkFaker::make()->parametersWithEmail()->toArray());
         $bag->set('data', [
-            'dummy1' => 'dummy2'
+            'dummy1' => 'dummy2',
         ]);
         $bag->set('event_class', 'Dummy');
 

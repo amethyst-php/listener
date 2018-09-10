@@ -38,7 +38,7 @@ class Listener extends Model implements EntityContract
      */
     protected $casts = [
         'enabled' => 'boolean',
-        'data'  => 'object'
+        'data'    => 'object',
     ];
 
     /**

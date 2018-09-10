@@ -69,18 +69,17 @@ class ListenerManager extends ModelManager
     }
 
     /**
-     * Retrieve all events_class available
+     * Retrieve all events_class available.
      *
      * @return array
      */
     public function getAvailableEventClasses()
     {
-
         /** @var \Railken\LaraOre\Listener\ListenerRepository */
         $repository = $this->getRepository();
 
-        return $repository->newQuery()->get()->map(function($v) { 
-            return $v->event_class; 
+        return $repository->newQuery()->get()->map(function ($v) {
+            return $v->event_class;
         })->toArray();
     }
 }
