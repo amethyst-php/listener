@@ -33,11 +33,11 @@ class ListenerServiceProvider extends ServiceProvider
         ])]);
         
 
-        $lm = new ListenerManager();
-
-        $available = $lm->getAvailableEventClasses();
-
         if (Schema::hasTable(Config::get('ore.listener.table'))) {
+            
+            $lm = new ListenerManager();
+
+            $available = $lm->getAvailableEventClasses();
 
             Event::listen(Config::get('ore.listener.events'), function ($event_name, $events) use ($available) {
 
