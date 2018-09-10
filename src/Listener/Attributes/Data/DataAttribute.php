@@ -1,20 +1,20 @@
 <?php
 
-namespace Railken\LaraOre\Listener\Attributes\Entities;
+namespace Railken\LaraOre\Listener\Attributes\Data;
 
 use Railken\Laravel\Manager\Attributes\BaseAttribute;
 use Railken\Laravel\Manager\Contracts\EntityContract;
 use Railken\Laravel\Manager\Tokens;
 use Respect\Validation\Validator as v;
 
-class EntitiesAttribute extends BaseAttribute
+class DataAttribute extends BaseAttribute
 {
     /**
      * Name attribute.
      *
      * @var string
      */
-    protected $name = 'entities';
+    protected $name = 'data';
 
     /**
      * Is the attribute required
@@ -37,30 +37,30 @@ class EntitiesAttribute extends BaseAttribute
      * @var array
      */
     protected $exceptions = [
-        Tokens::NOT_DEFINED    => Exceptions\ListenerEntitiesNotDefinedException::class,
-        Tokens::NOT_VALID      => Exceptions\ListenerEntitiesNotValidException::class,
-        Tokens::NOT_AUTHORIZED => Exceptions\ListenerEntitiesNotAuthorizedException::class,
-        Tokens::NOT_UNIQUE     => Exceptions\ListenerEntitiesNotUniqueException::class,
+        Tokens::NOT_DEFINED    => Exceptions\ListenerDataNotDefinedException::class,
+        Tokens::NOT_VALID      => Exceptions\ListenerDataNotValidException::class,
+        Tokens::NOT_AUTHORIZED => Exceptions\ListenerDataNotAuthorizedException::class,
+        Tokens::NOT_UNIQUE     => Exceptions\ListenerDataNotUniqueException::class,
     ];
 
     /**
      * List of all permissions.
      */
     protected $permissions = [
-        Tokens::PERMISSION_FILL => 'listener.attributes.entities.fill',
-        Tokens::PERMISSION_SHOW => 'listener.attributes.entities.show',
+        Tokens::PERMISSION_FILL => 'listener.attributes.data.fill',
+        Tokens::PERMISSION_SHOW => 'listener.attributes.data.show',
     ];
 
     /**
      * Is a value valid ?
      *
-     * @param EntityContract $entity
+     * @param \Railken\Laravel\Manager\Contracts\EntityContract $entity
      * @param mixed          $value
      *
      * @return bool
      */
     public function valid(EntityContract $entity, $value)
     {
-        return v::length(1, 255)->validate($value);
+        return true;
     }
 }

@@ -28,7 +28,7 @@ class Listener extends Model implements EntityContract
         'work_id',
         'enabled',
         'condition',
-        'entities',
+        'data',
     ];
 
     /**
@@ -38,6 +38,7 @@ class Listener extends Model implements EntityContract
      */
     protected $casts = [
         'enabled' => 'boolean',
+        'data'  => 'object'
     ];
 
     /**

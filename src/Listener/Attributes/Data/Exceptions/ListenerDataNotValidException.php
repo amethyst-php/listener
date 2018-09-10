@@ -1,29 +1,29 @@
 <?php
 
-namespace Railken\LaraOre\Listener\Attributes\Entities\Exceptions;
+namespace Railken\LaraOre\Listener\Attributes\Data\Exceptions;
 
 use Railken\LaraOre\Listener\Exceptions\ListenerAttributeException;
 
-class ListenerEntitiesNotDefinedException extends ListenerAttributeException
+class ListenerDataNotValidException extends ListenerAttributeException
 {
     /**
      * The reason (attribute) for which this exception is thrown.
      *
      * @var string
      */
-    protected $attribute = 'entities';
+    protected $attribute = 'data';
 
     /**
      * The code to identify the error.
      *
      * @var string
      */
-    protected $code = 'LISTENER_ENTITIES_NOT_DEFINED';
+    protected $code = 'LISTENER_DATA_NOT_VALID';
 
     /**
      * The message.
      *
      * @var string
      */
-    protected $message = 'The %s is required';
+    protected $message = 'The %s is not valid';
 }

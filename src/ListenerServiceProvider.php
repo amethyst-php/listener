@@ -10,9 +10,12 @@ use Railken\LaraOre\Api\Support\Router;
 use Railken\LaraOre\Listener\ListenerManager;
 use Railken\LaraOre\Template\TemplateManager;
 use Railken\LaraOre\Work\WorkManager;
+use Illuminate\Support\Facades\Schema;
 
 class ListenerServiceProvider extends ServiceProvider
-{
+{   
+    public $events = [];
+
     /**
      * Bootstrap any application services.
      */
@@ -25,9 +28,50 @@ class ListenerServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
         $this->loadRoutes();
 
-        config(['ore.permission.managers' => array_merge(Config::get('ore.permission.managers', []), [
+        config(['ore.managers' => array_merge(Config::get('ore.managers', []), [
             \Railken\LaraOre\Listener\ListenerManager::class,
         ])]);
+        
+
+        $lm = new ListenerManager();
+
+        $available = $lm->getAvailableEventClasses();
+
+        if (Schema::hasTable(Config::get('ore.listener.table'))) {
+
+            Event::listen(Config::get('ore.listener.events'), function ($event_name, $events) use ($available) {
+
+                if (!in_array($event_name, $available)) {
+                    return true;
+                }
+
+
+                $lm = new ListenerManager();
+                $wm = new WorkManager();
+                $tm = new TemplateManager();
+
+                /** @var \Railken\LaraOre\Listener\ListenerRepository */
+                $repository = $lm->getRepository();
+
+                $listeners = $repository->findByEventClass($event_name);
+
+                foreach ($listeners as $listener) {
+
+                    foreach ($events as $event) {
+                        
+                        $condition = $tm->renderRaw('text/plain', $listener->condition, $event->data);
+
+                        $data = array_merge($event->data, (array) json_decode($tm->renderRaw('text/plain', json_encode($listener->data), $event->data)));
+
+                        if ($condition === '1') {
+                            $wm->dispatch($listener->work, $data);
+                        }
+                    }
+                }
+
+                return false;
+            });
+        }
     }
 
     /**
@@ -41,25 +85,7 @@ class ListenerServiceProvider extends ServiceProvider
         $this->app->register(\Railken\LaraOre\WorkServiceProvider::class);
         $this->app->register(\Railken\LaraOre\TemplateServiceProvider::class);
 
-        Event::listen(Config::get('ore.listener.events'), function ($event_name, $events) {
-            $lm = new ListenerManager();
-            $wm = new WorkManager();
-            $tm = new TemplateManager();
 
-            /** @var \Railken\LaraOre\Listener\ListenerRepository */
-            $repository = $lm->getRepository();
-
-            $listeners = $repository->findByEventClass($event_name);
-
-            foreach ($listeners as $listener) {
-                foreach ($events as $event) {
-                    $condition = $tm->renderRaw('text/plain', $listener->condition, $event->data);
-                    if ($condition === '1') {
-                        $wm->dispatch($listener->work, $event->data, $listener->entities && isset($event->entities) ? $event->entities : []);
-                    }
-                }
-            }
-        });
     }
 
     /**

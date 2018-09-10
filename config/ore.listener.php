@@ -107,8 +107,18 @@ return [
             'enabled'    => true,
             'controller' => Railken\LaraOre\Http\Controllers\Admin\ListenersController::class,
             'router'     => [
-                'prefix'      => '/admin/listeners',
+                'prefix'      => '/listeners',
             ],
         ],
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Events Listener
+    |--------------------------------------------------------------------------
+    |
+    | Here you may configure the list of events
+    |
+    */
+    'events' => '*',
 ];

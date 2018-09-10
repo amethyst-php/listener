@@ -31,7 +31,7 @@ class ListenerManager extends ModelManager
         Attributes\Enabled\EnabledAttribute::class,
         Attributes\WorkId\WorkIdAttribute::class,
         Attributes\Condition\ConditionAttribute::class,
-        Attributes\Entities\EntitiesAttribute::class,
+        Attributes\Data\DataAttribute::class,
     ];
 
     /**
@@ -66,5 +66,21 @@ class ListenerManager extends ModelManager
         $this->setValidator(new $classValidator($this));
 
         parent::__construct($agent);
+    }
+
+    /**
+     * Retrieve all events_class available
+     *
+     * @return array
+     */
+    public function getAvailableEventClasses()
+    {
+
+        /** @var \Railken\LaraOre\Listener\ListenerRepository */
+        $repository = $this->getRepository();
+
+        return $repository->newQuery()->get()->map(function($v) { 
+            return $v->event_class; 
+        })->toArray();
     }
 }
