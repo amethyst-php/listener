@@ -1,8 +1,8 @@
-# lara-ore-listener
+# amethyst-listener
 
-[![Build Status](https://travis-ci.org/railken/lara-ore-listener.svg?branch=master)](https://travis-ci.org/railken/lara-ore-listener)
+[![Build Status](https://travis-ci.org/railken/amethyst-listener.svg?branch=master)](https://travis-ci.org/railken/amethyst-listener)
 
-This is a [lara-ore](https://github.com/railken/lara-ore) package
+[Amethyst](https://github.com/railken/amethyst) package.
 
 # Requirements
 
@@ -13,7 +13,7 @@ PHP 7.1 and later.
 You can install it via [Composer](https://getcomposer.org/) by typing the following command:
 
 ```bash
-composer require railken/lara-ore-listener
+composer require railken/amethyst-listener
 ```
 
 The package will automatically register itself.

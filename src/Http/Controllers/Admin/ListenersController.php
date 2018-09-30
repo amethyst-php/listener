@@ -1,54 +1,23 @@
 <?php
 
-namespace Railken\LaraOre\Http\Controllers\Admin;
+namespace Railken\Amethyst\Http\Controllers\Admin;
 
-use Railken\LaraOre\Api\Http\Controllers\RestConfigurableController;
-use Railken\LaraOre\Api\Http\Controllers\Traits as RestTraits;
+use Railken\Amethyst\Api\Http\Controllers\RestManagerController;
+use Railken\Amethyst\Api\Http\Controllers\Traits as RestTraits;
+use Railken\Amethyst\Managers\ListenerManager;
 
-class ListenersController extends RestConfigurableController
+class ListenersController extends RestManagerController
 {
     use RestTraits\RestIndexTrait;
+    use RestTraits\RestShowTrait;
     use RestTraits\RestCreateTrait;
     use RestTraits\RestUpdateTrait;
-    use RestTraits\RestShowTrait;
     use RestTraits\RestRemoveTrait;
 
     /**
-     * The config path.
+     * The class of the manager.
      *
      * @var string
      */
-    public $config = 'ore.listener';
-
-    /**
-     * The attributes that are queryable.
-     *
-     * @var array
-     */
-    public $queryable = [
-        'id',
-        'name',
-        'event_class',
-        'condition',
-        'work_id',
-        'data',
-        'enabled',
-        'created_at',
-        'updated_at',
-    ];
-
-    /**
-     * The attributes that are fillable.
-     *
-     * @var array
-     */
-    public $fillable = [
-        'name',
-        'event_class',
-        'condition',
-        'work_id',
-        'data',
-        'work',
-        'enabled',
-    ];
+    public $class = ListenerManager::class;
 }
