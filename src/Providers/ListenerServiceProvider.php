@@ -19,7 +19,7 @@ class ListenerServiceProvider extends CommonServiceProvider
     {
         parent::boot();
 
-        if (Schema::hasTable(Config::get('amethyst.listener.managers.listener.table'))) {
+        if (Schema::hasTable(Config::get('amethyst.listener.data.listener.table'))) {
             $lm = new ListenerManager();
 
             $available = $lm->getAvailableEventClasses();
