@@ -25,9 +25,9 @@ class ListenerTest extends BaseTest
     protected $group = 'admin';
 
     /**
-     * Base path config.
+     * Route name.
      *
      * @var string
      */
-    protected $config = 'amethyst.listener.http.admin.listener';
+    protected $route = 'admin.listener';
 }

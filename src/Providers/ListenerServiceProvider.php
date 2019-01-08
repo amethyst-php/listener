@@ -9,6 +9,7 @@ use Railken\Amethyst\Common\CommonServiceProvider;
 use Railken\Amethyst\Managers\ListenerManager;
 use Railken\Amethyst\Managers\TemplateManager;
 use Railken\Amethyst\Managers\WorkManager;
+use Symfony\Component\Yaml\Yaml;
 
 class ListenerServiceProvider extends CommonServiceProvider
 {
@@ -42,7 +43,7 @@ class ListenerServiceProvider extends CommonServiceProvider
                     foreach ($events as $event) {
                         $condition = $tm->renderRaw('text/plain', $listener->condition, $event->data);
 
-                        $data = array_merge($event->data, (array) json_decode($tm->renderRaw('text/plain', (string) json_encode($listener->data), $event->data)));
+                        $data = array_merge($event->data, Yaml::parse($tm->renderRaw('text/plain', $listener->data, $event->data)));
 
                         if ($condition === '1') {
                             $wm->dispatch($listener->work, $data);

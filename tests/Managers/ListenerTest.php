@@ -10,6 +10,7 @@ use Railken\Amethyst\Providers\ListenerServiceProvider;
 use Railken\Amethyst\Tests\BaseTest;
 use Railken\Amethyst\Tests\Events\DummyEvent;
 use Railken\Lem\Support\Testing\TestableBaseTrait;
+use Symfony\Component\Yaml\Yaml;
 
 class ListenerTest extends BaseTest
 {
@@ -34,7 +35,11 @@ class ListenerTest extends BaseTest
         $esm = new EmailSenderManager();
         $es = $esm->create(EmailSenderFaker::make()->parameters()->set('body', '{{ user.name }}'))->getResource();
 
-        $listener = ListenerFaker::make()->parameters()->set('data', ['user_name' => '{{ user.name }}'])->set('work.payload.data.id', $es->id)->set('event_class', DummyEvent::class);
+        $listener = ListenerFaker::make()->parameters()
+            ->set('data', Yaml::dump(['user_name' => '{{ user.name }}']))
+            ->set('work.payload.data.id', $es->id)
+            ->set('event_class', DummyEvent::class)
+        ;
 
         $this->getManager()->create($listener)->getResource();
 

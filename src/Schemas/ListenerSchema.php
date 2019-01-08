@@ -23,7 +23,7 @@ class ListenerSchema extends Schema
             Attributes\LongTextAttribute::make('description'),
             Attributes\TextAttribute::make('event_class'),
             Attributes\BooleanAttribute::make('enabled'),
-            Attributes\ObjectAttribute::make('data'),
+            Attributes\YamlAttribute::make('data'),
             Attributes\TextAttribute::make('condition'),
             Attributes\BelongsToAttribute::make('work_id')
                 ->setRelationName('work')
