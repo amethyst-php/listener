@@ -41,9 +41,10 @@ class ListenerServiceProvider extends CommonServiceProvider
 
                 foreach ($listeners as $listener) {
                     foreach ($events as $event) {
-                        $condition = $tm->renderRaw('text/plain', $listener->condition, $event->data);
 
-                        $data = array_merge($event->data, Yaml::parse($tm->renderRaw('text/plain', $listener->data, $event->data)));
+                        $condition = $tm->renderRaw('text/plain', $listener->condition, ['event' => $event]);
+
+                        $data = (array) Yaml::parse($tm->renderRaw('text/plain', $listener->data, ['event' => $event]));
 
                         if ($condition === '1') {
                             $wm->dispatch($listener->work, $data);
