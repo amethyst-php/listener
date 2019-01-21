@@ -22,7 +22,8 @@ class ListenerSchema extends Schema
                 ->setRequired(true)
                 ->setUnique(true),
             Attributes\LongTextAttribute::make('description'),
-            Attributes\TextAttribute::make('event_class'),
+            Attributes\TextAttribute::make('event_class')
+                ->setRequired(true),
             Attributes\BooleanAttribute::make('enabled'),
             Attributes\YamlAttribute::make('data')->setDefault(function (EntityContract $entity) {
                 return file_get_contents(__DIR__.'/../../resources/schema/default/data.yaml');
@@ -30,7 +31,8 @@ class ListenerSchema extends Schema
             Attributes\TextAttribute::make('condition'),
             Attributes\BelongsToAttribute::make('work_id')
                 ->setRelationName('work')
-                ->setRelationManager(WorkManager::class),
+                ->setRelationManager(WorkManager::class)
+                ->setRequired(true),
             Attributes\CreatedAtAttribute::make(),
             Attributes\UpdatedAtAttribute::make(),
             Attributes\DeletedAtAttribute::make(),
