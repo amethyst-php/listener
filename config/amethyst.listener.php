@@ -35,11 +35,11 @@ return [
     'http' => [
         'admin' => [
             'listener' => [
-                'enabled'     => true,
-                'controller'  => Railken\Amethyst\Http\Controllers\Admin\ListenersController::class,
-                'router'      => [
-                    'as'        => 'listener.',
-                    'prefix'    => '/listeners',
+                'enabled'    => true,
+                'controller' => Railken\Amethyst\Http\Controllers\Admin\ListenersController::class,
+                'router'     => [
+                    'as'     => 'listener.',
+                    'prefix' => '/listeners',
                 ],
             ],
         ],

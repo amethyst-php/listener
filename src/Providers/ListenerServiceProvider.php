@@ -26,7 +26,7 @@ class ListenerServiceProvider extends CommonServiceProvider
             $available = $lm->getAvailableEventClasses();
 
             Event::listen(Config::get('amethyst.listener.events'), function ($event_name, $events) use ($available) {
-                if (!in_array($event_name, $available)) {
+                if (!in_array($event_name, $available, true)) {
                     return true;
                 }
 
@@ -41,7 +41,6 @@ class ListenerServiceProvider extends CommonServiceProvider
 
                 foreach ($listeners as $listener) {
                     foreach ($events as $event) {
-
                         $condition = $tm->renderRaw('text/plain', $listener->condition, ['event' => $event]);
 
                         $data = (array) Yaml::parse($tm->renderRaw('text/plain', $listener->data, ['event' => $event]));
