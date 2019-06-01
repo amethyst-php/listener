@@ -46,7 +46,7 @@ class ListenerServiceProvider extends CommonServiceProvider
                         $data = (array) Yaml::parse($tm->renderRaw('text/plain', $listener->data, ['event' => $event]));
 
                         if ($condition === '1') {
-                            $wm->dispatch($listener->work, $data);
+                            $wm->execute($listener->work, $data);
                         }
                     }
                 }
