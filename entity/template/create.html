@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base href="/amethyst-listener/">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link href="https://fonts.googleapis.com/css?family=Roboto|Rubik|Open Sans" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <script src='https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js'></script>
+  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+  <link href='style.css' rel='stylesheet'>
+</head>
+<body>
+  <header>
+    <a class="btn purple">Switch to frontend docs</a>
+  </header>
+  <main>
+    <div class="sidebar" style='display: flex'>
+      <div style='flex-grow: 1'>
+      </div>
+      <div class="navigation">
+        <ul>
+          <li><a href=''>Introduction</a></li>
+                    <li><a href='entity/work/'>work</a></li>
+                    <li><a href='entity/email-sender/'>email-sender</a></li>
+                    <li><a href='entity/data-builder/'>data-builder</a></li>
+                    <li><a href='entity/template/'>template</a></li>
+                    <li><a href='entity/file/'>file</a></li>
+                    <li><a href='entity/file-generator/'>file-generator</a></li>
+                    <li><a href='entity/notification-sender/'>notification-sender</a></li>
+                    <li><a href='entity/notification/'>notification</a></li>
+                    <li><a href='entity/user/'>user</a></li>
+                    <li><a href='entity/listener/'>listener</a></li>
+                  </ul>
+      </div>
+    </div>
+    <div class="container">
+      <div class="content">
+        <h2>Create</h2>
+
+<p>Define a new instance of the <a href="manager.html">Manager</a></p>
+
+<pre><code class="php">use Railken\Amethyst\Managers\TemplateManager;
+
+$manager = new TemplateManager();
+</code></pre>
+
+<p>Create a new <a href="model.html">entity</a></p>
+
+<pre><code class="php">$params = [
+    "name" =&gt; "a common name0.58049600 1562549199",
+    "filename" =&gt; "test.pdf",
+    "filetype" =&gt; "application/pdf",
+    "description" =&gt; "A description",
+    "content" =&gt; "The cake is a {{ message }}",
+    "data_builder" =&gt; [
+        "name" =&gt; "Florida Wisozk",
+        "description" =&gt; "Aliquam delectus eligendi vel aut expedita perspiciatis quia est. Ut fuga omnis cum eius recusandae fuga aut. Inventore ducimus necessitatibus voluptas consequatur voluptatem et.",
+        "class_name" =&gt; "Railken\\Amethyst\\DataBuilders\\CommonDataBuilder",
+        "class_arguments" =&gt; "- Railken\\Amethyst\\Managers\\DataBuilderManager\n",
+        "filter" =&gt; "id eq 1",
+        "input" =&gt; "date:\n    type: date\n    validation: 'date_format:Y-m-d'\n",
+        "mock_data" =&gt; "date: '2018-01-01'\n",
+        "include" =&gt; "bar"
+    ]
+];
+
+$result = $manager-&gt;create($params);
+</code></pre>
+
+<p>Check the result of the operation</p>
+
+<pre><code class="php">if ($result-&gt;ok()) {
+    // All ok
+} else {
+    // Something goes wrong
+}
+</code></pre>
+
+<p>Retrieve the <a href="model.html">entity</a> from the <a href="result.html">result</a></p>
+
+<pre><code class="php">$entity = $result-&gt;getResource();
+</code></pre>
+
+<p>Throw an exception immediately if the operation fails</p>
+
+<pre><code class="php">use Railken\Lem\Exceptions\Exception;
+
+$params = [
+    "name" =&gt; "a common name0.58049600 1562549199",
+    "filename" =&gt; "test.pdf",
+    "filetype" =&gt; "application/pdf",
+    "description" =&gt; "A description",
+    "content" =&gt; "The cake is a {{ message }}",
+    "data_builder" =&gt; [
+        "name" =&gt; "Florida Wisozk",
+        "description" =&gt; "Aliquam delectus eligendi vel aut expedita perspiciatis quia est. Ut fuga omnis cum eius recusandae fuga aut. Inventore ducimus necessitatibus voluptas consequatur voluptatem et.",
+        "class_name" =&gt; "Railken\\Amethyst\\DataBuilders\\CommonDataBuilder",
+        "class_arguments" =&gt; "- Railken\\Amethyst\\Managers\\DataBuilderManager\n",
+        "filter" =&gt; "id eq 1",
+        "input" =&gt; "date:\n    type: date\n    validation: 'date_format:Y-m-d'\n",
+        "mock_data" =&gt; "date: '2018-01-01'\n",
+        "include" =&gt; "bar"
+    ]
+];
+
+try {
+    $result = $manager-&gt;createOrFail($params);
+} catch (Exception $e) {
+    // ...
+}
+</code></pre>
+
+<h2>Other resources</h2>
+
+<ul>
+<li><a href="attributes.html">Attributes</a></li>
+<li><a href="errors.html">Errors</a></li>
+<li><a href="result.html">Handle the result</a></li>
+</ul>
+
+<hr />
+
+<p><a href="index.html">Back</a></p>
+
+      </div>
+    </div>
+  </main>
+</body>
+</html>

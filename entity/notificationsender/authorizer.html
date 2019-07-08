@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base href="/amethyst-listener/">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link href="https://fonts.googleapis.com/css?family=Roboto|Rubik|Open Sans" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <script src='https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js'></script>
+  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+  <link href='style.css' rel='stylesheet'>
+</head>
+<body>
+  <header>
+    <a class="btn purple">Switch to frontend docs</a>
+  </header>
+  <main>
+    <div class="sidebar" style='display: flex'>
+      <div style='flex-grow: 1'>
+      </div>
+      <div class="navigation">
+        <ul>
+          <li><a href=''>Introduction</a></li>
+                    <li><a href='entity/work/'>work</a></li>
+                    <li><a href='entity/email-sender/'>email-sender</a></li>
+                    <li><a href='entity/data-builder/'>data-builder</a></li>
+                    <li><a href='entity/template/'>template</a></li>
+                    <li><a href='entity/file/'>file</a></li>
+                    <li><a href='entity/file-generator/'>file-generator</a></li>
+                    <li><a href='entity/notification-sender/'>notification-sender</a></li>
+                    <li><a href='entity/notification/'>notification</a></li>
+                    <li><a href='entity/user/'>user</a></li>
+                    <li><a href='entity/listener/'>listener</a></li>
+                  </ul>
+      </div>
+    </div>
+    <div class="container">
+      <div class="content">
+        <h2>Railken\Amethyst\Authorizers\NotificationSenderAuthorizer</h2>
+
+<p>The authorizer is used during any operation that manipulate the data to check if the agent is authorized or not</p>
+
+<h4>Extend the class</h4>
+
+<p>Create the new authorizer in <code>app/Authorizers/NotificationSenderAuthorizer</code></p>
+
+<pre><code class="php">namespace App\Authorizers;
+
+use Railken\Amethyst\Authorizers\NotificationSenderAuthorizer as Authorizer;
+
+class NotificationSenderAuthorizer extends Authorizer {
+    // ...
+}
+</code></pre>
+
+<p>Update the file <code>configs/amethyst.notification-sender</code> with the new class</p>
+
+<pre><code class="php">return [
+    'data' =&gt; [
+        'notification-sender' =&gt; [
+            'authorizer' =&gt; App\Authorizers\NotificationSenderAuthorizer::class,
+        ],
+    ]
+];
+</code></pre>
+
+<hr />
+
+<p><a href="index.html">Back</a></p>
+
+      </div>
+    </div>
+  </main>
+</body>
+</html>

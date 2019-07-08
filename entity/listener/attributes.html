@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base href="/amethyst-listener/">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link href="https://fonts.googleapis.com/css?family=Roboto|Rubik|Open Sans" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <script src='https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js'></script>
+  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+  <link href='style.css' rel='stylesheet'>
+</head>
+<body>
+  <header>
+    <a class="btn purple">Switch to frontend docs</a>
+  </header>
+  <main>
+    <div class="sidebar" style='display: flex'>
+      <div style='flex-grow: 1'>
+      </div>
+      <div class="navigation">
+        <ul>
+          <li><a href=''>Introduction</a></li>
+                    <li><a href='entity/work/'>work</a></li>
+                    <li><a href='entity/email-sender/'>email-sender</a></li>
+                    <li><a href='entity/data-builder/'>data-builder</a></li>
+                    <li><a href='entity/template/'>template</a></li>
+                    <li><a href='entity/file/'>file</a></li>
+                    <li><a href='entity/file-generator/'>file-generator</a></li>
+                    <li><a href='entity/notification-sender/'>notification-sender</a></li>
+                    <li><a href='entity/notification/'>notification</a></li>
+                    <li><a href='entity/user/'>user</a></li>
+                    <li><a href='entity/listener/'>listener</a></li>
+                  </ul>
+      </div>
+    </div>
+    <div class="container">
+      <div class="content">
+        <h2>Attributes</h2>
+
+<p>List of all attributes</p>
+
+<table>
+<thead>
+<tr>
+  <th>Name</th>
+  <th>Fillable</th>
+  <th>Required</th>
+  <th>Unique</th>
+  <th>Default</th>
+  <th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>id</td>
+  <td>No</td>
+  <td>No</td>
+  <td>No</td>
+  <td>null</td>
+  <td>Indentify the entity</td>
+</tr>
+<tr>
+  <td>name</td>
+  <td>Yes</td>
+  <td>Yes</td>
+  <td>Yes</td>
+  <td>null</td>
+  <td></td>
+</tr>
+<tr>
+  <td>description</td>
+  <td>Yes</td>
+  <td>No</td>
+  <td>No</td>
+  <td>null</td>
+  <td></td>
+</tr>
+<tr>
+  <td>event_class</td>
+  <td>Yes</td>
+  <td>Yes</td>
+  <td>No</td>
+  <td>null</td>
+  <td></td>
+</tr>
+<tr>
+  <td>enabled</td>
+  <td>Yes</td>
+  <td>No</td>
+  <td>No</td>
+  <td>null</td>
+  <td></td>
+</tr>
+<tr>
+  <td>data</td>
+  <td>Yes</td>
+  <td>No</td>
+  <td>No</td>
+  <td>&quot;# This is an optional field that will permits you to convert some variables into others\n# before calling the worker.&quot;</td>
+  <td></td>
+</tr>
+<tr>
+  <td>condition</td>
+  <td>Yes</td>
+  <td>No</td>
+  <td>No</td>
+  <td>null</td>
+  <td></td>
+</tr>
+<tr>
+  <td>work_id</td>
+  <td>Yes</td>
+  <td>Yes</td>
+  <td>No</td>
+  <td>null</td>
+  <td></td>
+</tr>
+<tr>
+  <td>created_at</td>
+  <td>No</td>
+  <td>No</td>
+  <td>No</td>
+  <td>null</td>
+  <td>Indicate the date when the record was created</td>
+</tr>
+<tr>
+  <td>updated_at</td>
+  <td>No</td>
+  <td>No</td>
+  <td>No</td>
+  <td>null</td>
+  <td>Indicate the date when the record was last updated</td>
+</tr>
+<tr>
+  <td>deleted_at</td>
+  <td>No</td>
+  <td>No</td>
+  <td>No</td>
+  <td>null</td>
+  <td>Indicate the date when the record was soft-deleted</td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<p><a href="index.html">Back</a></p>
+
+      </div>
+    </div>
+  </main>
+</body>
+</html>

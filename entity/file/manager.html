@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base href="/amethyst-listener/">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link href="https://fonts.googleapis.com/css?family=Roboto|Rubik|Open Sans" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <script src='https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js'></script>
+  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+  <link href='style.css' rel='stylesheet'>
+</head>
+<body>
+  <header>
+    <a class="btn purple">Switch to frontend docs</a>
+  </header>
+  <main>
+    <div class="sidebar" style='display: flex'>
+      <div style='flex-grow: 1'>
+      </div>
+      <div class="navigation">
+        <ul>
+          <li><a href=''>Introduction</a></li>
+                    <li><a href='entity/work/'>work</a></li>
+                    <li><a href='entity/email-sender/'>email-sender</a></li>
+                    <li><a href='entity/data-builder/'>data-builder</a></li>
+                    <li><a href='entity/template/'>template</a></li>
+                    <li><a href='entity/file/'>file</a></li>
+                    <li><a href='entity/file-generator/'>file-generator</a></li>
+                    <li><a href='entity/notification-sender/'>notification-sender</a></li>
+                    <li><a href='entity/notification/'>notification</a></li>
+                    <li><a href='entity/user/'>user</a></li>
+                    <li><a href='entity/listener/'>listener</a></li>
+                  </ul>
+      </div>
+    </div>
+    <div class="container">
+      <div class="content">
+        <h2>Railken\Amethyst\Managers\FileManager</h2>
+
+<p>The manager is the main class to access and manipulate your model.</p>
+
+<p>Why use the manager instead of the model? Because the manager handle all the boring stuff like validation and authorization for you.
+Remember that the manager return always a <a href="result.html">Result</a>.</p>
+
+<ul>
+<li><a href="create.html">Create a new entity</a></li>
+<li><a href="update.html">Update an entity</a></li>
+<li><a href="remove.html">Remove an entity</a></li>
+<li><a href="repository.html">Performing queries with the Repository</a></li>
+<li><a href="result.html">Handle the result</a></li>
+<li><a href="authorization.html">Authorization</a></li>
+<li><a href="attributes.html">Attributes</a></li>
+<li><a href="errors.html">Errors</a></li>
+<li><a href="permissions.html">Permissions</a></li>
+</ul>
+
+<h4>Extend the class</h4>
+
+<p>Create the new manager in <code>app/Managers/FileManager</code></p>
+
+<pre><code class="php">namespace App\Managers;
+
+use Railken\Amethyst\Managers\FileManager as Manager;
+
+class FileManager extends Manager {
+    // ...
+}
+</code></pre>
+
+<p>Update the file <code>configs/amethyst.file</code> with the new class</p>
+
+<pre><code class="php">return [
+    'data' =&gt; [
+        'file' =&gt; [
+            'manager' =&gt; App\Managers\FileManager::class,
+        ],
+    ]
+];
+</code></pre>
+
+<hr />
+
+<p><a href="index.html">Back</a></p>
+
+      </div>
+    </div>
+  </main>
+</body>
+</html>

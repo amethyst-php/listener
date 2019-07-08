@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base href="/amethyst-listener/">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link href="https://fonts.googleapis.com/css?family=Roboto|Rubik|Open Sans" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <script src='https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js'></script>
+  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+  <link href='style.css' rel='stylesheet'>
+</head>
+<body>
+  <header>
+    <a class="btn purple">Switch to frontend docs</a>
+  </header>
+  <main>
+    <div class="sidebar" style='display: flex'>
+      <div style='flex-grow: 1'>
+      </div>
+      <div class="navigation">
+        <ul>
+          <li><a href=''>Introduction</a></li>
+                    <li><a href='entity/work/'>work</a></li>
+                    <li><a href='entity/email-sender/'>email-sender</a></li>
+                    <li><a href='entity/data-builder/'>data-builder</a></li>
+                    <li><a href='entity/template/'>template</a></li>
+                    <li><a href='entity/file/'>file</a></li>
+                    <li><a href='entity/file-generator/'>file-generator</a></li>
+                    <li><a href='entity/notification-sender/'>notification-sender</a></li>
+                    <li><a href='entity/notification/'>notification</a></li>
+                    <li><a href='entity/user/'>user</a></li>
+                    <li><a href='entity/listener/'>listener</a></li>
+                  </ul>
+      </div>
+    </div>
+    <div class="container">
+      <div class="content">
+        <h1>NotificationSender</h1>
+
+<ul>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#attributes">Attributes</a></li>
+<li><a href="#model">Model</a></li>
+<li><a href="#create">Create a new entity</a></li>
+<li><a href="#update">Update an entity</a></li>
+<li><a href="#remove">Remove an entity</a></li>
+<li><a href="#result">Handle the result</a></li>
+<li><a href="#repository">Querying</a></li>
+<li><a href="#authorization">Authorization</a></li>
+<li><a href="#schema">Schema</a></li>
+<li><a href="#validator">Validator</a></li>
+<li><a href="#authorizer">Authorizer</a></li>
+<li><a href="#serializer">Serializer</a></li>
+<li><a href="#faker">Faker</a></li>
+<li><a href="#errors">Errors</a></li>
+<li><a href="#permissions">Permissions</a></li>
+</ul>
+
+<h2><a name="introduction"></a>Introduction</h2>
+
+<p>To access the data, you can either use the <a href="#manager">manager</a> or directly the <a href="#model">Eloquent model</a>.</p>
+
+<p>If you wish to extend any class, remember to update the configuration. 
+You can publish the configuration through the command <code>php artisan vendor:publish</code></p>
+
+<p>Let's first check the list of all attributes</p>
+
+<h2><a name="attributes"></a>Attributes</h2>
+
+<table>
+<thead>
+<tr>
+  <th>Name</th>
+  <th>Fillable</th>
+  <th>Required</th>
+  <th>Unique</th>
+  <th>Default</th>
+  <th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>id</td>
+  <td>No</td>
+  <td>No</td>
+  <td>No</td>
+  <td>/</td>
+  <td>Indentify the entity</td>
+</tr>
+<tr>
+  <td>name</td>
+  <td>Yes</td>
+  <td>Yes</td>
+  <td>Yes</td>
+  <td>null</td>
+  <td></td>
+</tr>
+<tr>
+  <td>description</td>
+  <td>Yes</td>
+  <td>No</td>
+  <td>No</td>
+  <td>null</td>
+  <td></td>
+</tr>
+<tr>
+  <td>title</td>
+  <td>Yes</td>
+  <td>No</td>
+  <td>No</td>
+  <td>null</td>
+  <td></td>
+</tr>
+<tr>
+  <td>message</td>
+  <td>Yes</td>
+  <td>No</td>
+  <td>No</td>
+  <td>null</td>
+  <td></td>
+</tr>
+<tr>
+  <td>targets</td>
+  <td>Yes</td>
+  <td>Yes</td>
+  <td>No</td>
+  <td>null</td>
+  <td></td>
+</tr>
+<tr>
+  <td>options</td>
+  <td>Yes</td>
+  <td>No</td>
+  <td>No</td>
+  <td>null</td>
+  <td></td>
+</tr>
+<tr>
+  <td>data_builder_id</td>
+  <td>Yes</td>
+  <td>No</td>
+  <td>No</td>
+  <td>null</td>
+  <td></td>
+</tr>
+<tr>
+  <td>created_at</td>
+  <td>No</td>
+  <td>No</td>
+  <td>No</td>
+  <td>/</td>
+  <td>Indicate the date when the record was created</td>
+</tr>
+<tr>
+  <td>updated_at</td>
+  <td>No</td>
+  <td>No</td>
+  <td>No</td>
+  <td>/</td>
+  <td>Indicate the date when the record was last updated</td>
+</tr>
+<tr>
+  <td>deleted_at</td>
+  <td>No</td>
+  <td>No</td>
+  <td>No</td>
+  <td>/</td>
+  <td>Indicate the date when the record was soft-deleted</td>
+</tr>
+</tbody>
+</table>
+
+<h2><a name="model"></a>Model</h2>
+
+<p>Base class <code>Railken\Amethyst\Models\NotificationSender</code></p>
+
+<p>You can extends the class like the following example in  <code>app/Models/NotificationSender</code></p>
+
+<pre><code class="php">namespace App\Models;
+
+use Railken\Amethyst\Models\NotificationSender as Model;
+
+class NotificationSender extends Model {
+    // ...
+}
+</code></pre>
+
+<p>Remember to update the configuration with new class.</p>
+
+<h2><a name="manager"></a>Manager</h2>
+
+<p>Base class <code>Railken\Amethyst\Managers\NotificationSenderManager</code></p>
+
+<p>The manager is the main class to access and manipulate your model.</p>
+
+<p>Why use the manager instead of the model? Because the manager handle all the boring stuff like validation and authorization for you.
+Remember that the manager return always a <a href="#result">Result</a>.</p>
+
+<p>You can extends the class like the following example in <code>app/Managers/NotificationSenderManager</code></p>
+
+<pre><code class="php">namespace App\Managers;
+
+use Railken\Amethyst\Managers\NotificationSenderManager as Manager;
+
+class NotificationSenderManager extends Manager {
+    // ...
+}
+</code></pre>
+
+<p>Remember to update the configuration with new class.</p>
+
+<h2><a name="create"></a>Create a new entity</h2>
+
+<p>First you have to define a new instance of the <a href="#manager">Manager</a></p>
+
+<pre><code class="php">use Railken\Amethyst\Managers\NotificationSenderManager;
+
+$manager = new NotificationSenderManager();
+</code></pre>
+
+<p>Now you can use the method <code>create</code> to create a new a new <a href="#model">entity</a></p>
+
+<pre><code class="php">$params = [
+    "name" =&gt; "Leopold Daniel",
+    "description" =&gt; "Iste aliquid adipisci numquam quo rerum eius odit. A voluptatum minima quo quibusdam saepe enim ut molestias. At quia odit quo dolores ullam molestiae accusantium consequatur.",
+    "data_builder" =&gt; [
+        "name" =&gt; "Earnest Pouros",
+        "description" =&gt; "Voluptatum illo nemo dolor ex assumenda excepturi. In voluptas omnis modi distinctio. Repudiandae accusamus sed cum pariatur quibusdam vel. Et facilis deleniti dolores quos sed eius.",
+        "class_name" =&gt; "Railken\\Amethyst\\DataBuilders\\CommonDataBuilder",
+        "class_arguments" =&gt; "- Railken\\Amethyst\\Managers\\DataBuilderManager\n",
+        "filter" =&gt; "id eq 1",
+        "input" =&gt; "date:\n    type: date\n    validation: 'date_format:Y-m-d'\n",
+        "mock_data" =&gt; "date: '2018-01-01'\n",
+        "include" =&gt; "bar",
+        "data_builder" =&gt; [
+            "class_name" =&gt; "Railken\\Amethyst\\Fakers\\EmailSenderDataBuilder"
+        ]
+    ],
+    "targets" =&gt; "1",
+    "title" =&gt; "Jensen Gleason",
+    "message" =&gt; "Veritatis eos nemo est voluptates in error omnis. Velit quasi sint hic ut. Qui nam non alias velit omnis dolorum.",
+    "options" =&gt; "error: false"
+];
+
+$result = $manager-&gt;create($params);
+</code></pre>
+
+<p>Check the result of the operation</p>
+
+<pre><code class="php">if ($result-&gt;ok()) {
+    // All ok
+} else {
+    // Something goes wrong
+}
+</code></pre>
+
+<p>Retrieve the <a href="#model">entity</a> from the <a href="#result">result</a></p>
+
+<pre><code class="php">$entity = $result-&gt;getResource();
+</code></pre>
+
+<p>Throw an exception immediately if the operation fails</p>
+
+<pre><code class="php">use Railken\Lem\Exceptions\Exception;
+
+$params = [
+    "name" =&gt; "Leopold Daniel",
+    "description" =&gt; "Iste aliquid adipisci numquam quo rerum eius odit. A voluptatum minima quo quibusdam saepe enim ut molestias. At quia odit quo dolores ullam molestiae accusantium consequatur.",
+    "data_builder" =&gt; [
+        "name" =&gt; "Earnest Pouros",
+        "description" =&gt; "Voluptatum illo nemo dolor ex assumenda excepturi. In voluptas omnis modi distinctio. Repudiandae accusamus sed cum pariatur quibusdam vel. Et facilis deleniti dolores quos sed eius.",
+        "class_name" =&gt; "Railken\\Amethyst\\DataBuilders\\CommonDataBuilder",
+        "class_arguments" =&gt; "- Railken\\Amethyst\\Managers\\DataBuilderManager\n",
+        "filter" =&gt; "id eq 1",
+        "input" =&gt; "date:\n    type: date\n    validation: 'date_format:Y-m-d'\n",
+        "mock_data" =&gt; "date: '2018-01-01'\n",
+        "include" =&gt; "bar",
+        "data_builder" =&gt; [
+            "class_name" =&gt; "Railken\\Amethyst\\Fakers\\EmailSenderDataBuilder"
+        ]
+    ],
+    "targets" =&gt; "1",
+    "title" =&gt; "Jensen Gleason",
+    "message" =&gt; "Veritatis eos nemo est voluptates in error omnis. Velit quasi sint hic ut. Qui nam non alias velit omnis dolorum.",
+    "options" =&gt; "error: false"
+];
+
+try {
+    $result = $manager-&gt;createOrFail($params);
+} catch (Exception $e) {
+    // ...
+}
+</code></pre>
+
+<h2><a name="update"></a>Update</h2>
+
+<p>Define a new instance of the <a href="#manager">Manager</a></p>
+
+<pre><code class="php">use Railken\Amethyst\Managers\NotificationSenderManager;
+
+$manager = new NotificationSenderManager();
+</code></pre>
+
+<p>Retrieve an <a href="#model">entity</a> using the <a href="#repository">repository</a></p>
+
+<pre><code class="php">$entity = $manager-&gt;getRepository()-&gt;findOneById(1);
+</code></pre>
+
+<p>Update an existent <a href="#model">entity</a></p>
+
+<pre><code class="php">$params = [
+    "name" =&gt; "Leopold Daniel",
+    "description" =&gt; "Iste aliquid adipisci numquam quo rerum eius odit. A voluptatum minima quo quibusdam saepe enim ut molestias. At quia odit quo dolores ullam molestiae accusantium consequatur.",
+    "data_builder" =&gt; [
+        "name" =&gt; "Earnest Pouros",
+        "description" =&gt; "Voluptatum illo nemo dolor ex assumenda excepturi. In voluptas omnis modi distinctio. Repudiandae accusamus sed cum pariatur quibusdam vel. Et facilis deleniti dolores quos sed eius.",
+        "class_name" =&gt; "Railken\\Amethyst\\DataBuilders\\CommonDataBuilder",
+        "class_arguments" =&gt; "- Railken\\Amethyst\\Managers\\DataBuilderManager\n",
+        "filter" =&gt; "id eq 1",
+        "input" =&gt; "date:\n    type: date\n    validation: 'date_format:Y-m-d'\n",
+        "mock_data" =&gt; "date: '2018-01-01'\n",
+        "include" =&gt; "bar",
+        "data_builder" =&gt; [
+            "class_name" =&gt; "Railken\\Amethyst\\Fakers\\EmailSenderDataBuilder"
+        ]
+    ],
+    "targets" =&gt; "1",
+    "title" =&gt; "Jensen Gleason",
+    "message" =&gt; "Veritatis eos nemo est voluptates in error omnis. Velit quasi sint hic ut. Qui nam non alias velit omnis dolorum.",
+    "options" =&gt; "error: false"
+];
+
+$result = $manager-&gt;update($entity, $params);
+</code></pre>
+
+<h2><a name="remove"></a>Remove</h2>
+
+<p>Define a new instance of the <a href="#manager">Manager</a></p>
+
+<pre><code class="php">use Railken\Amethyst\Managers\NotificationSenderManager;
+
+$manager = new NotificationSenderManager();
+</code></pre>
+
+<pre><code class="php">$entity = $manager-&gt;getRepository()-&gt;findOneById(1);
+
+$result = $manager-&gt;remove($entity);
+</code></pre>
+
+<h2><a name="result"></a>Result</h2>
+
+<p>Once you've got the result you should always check if an error has occurred, if not, retrieve the resource.</p>
+
+<pre><code class="php">use Railken\Amethyst\Managers\NotificationSenderManager;
+
+$manager = new NotificationSenderManager();
+
+$result = $manager-&gt;create([
+    "name" =&gt; "Leopold Daniel",
+    "description" =&gt; "Iste aliquid adipisci numquam quo rerum eius odit. A voluptatum minima quo quibusdam saepe enim ut molestias. At quia odit quo dolores ullam molestiae accusantium consequatur.",
+    "data_builder" =&gt; [
+        "name" =&gt; "Earnest Pouros",
+        "description" =&gt; "Voluptatum illo nemo dolor ex assumenda excepturi. In voluptas omnis modi distinctio. Repudiandae accusamus sed cum pariatur quibusdam vel. Et facilis deleniti dolores quos sed eius.",
+        "class_name" =&gt; "Railken\\Amethyst\\DataBuilders\\CommonDataBuilder",
+        "class_arguments" =&gt; "- Railken\\Amethyst\\Managers\\DataBuilderManager\n",
+        "filter" =&gt; "id eq 1",
+        "input" =&gt; "date:\n    type: date\n    validation: 'date_format:Y-m-d'\n",
+        "mock_data" =&gt; "date: '2018-01-01'\n",
+        "include" =&gt; "bar",
+        "data_builder" =&gt; [
+            "class_name" =&gt; "Railken\\Amethyst\\Fakers\\EmailSenderDataBuilder"
+        ]
+    ],
+    "targets" =&gt; "1",
+    "title" =&gt; "Jensen Gleason",
+    "message" =&gt; "Veritatis eos nemo est voluptates in error omnis. Velit quasi sint hic ut. Qui nam non alias velit omnis dolorum.",
+    "options" =&gt; "error: false"
+]);
+
+if ($result-&gt;ok()) {
+
+    $resource = $result-&gt;getResource();
+
+} else {
+
+    // Loop through all errors
+    $result-&gt;getErrors()-&gt;map(function($error) {
+        return $error-&gt;toArray();
+    }))
+
+    // Retrieve an array of all errors
+    $result-&gt;getSimpleErrors();
+
+    /* The result is something like this:
+
+        [0] =&gt; Array
+            (
+                [code] =&gt; FIELD_NOT_DEFINED
+                [label] =&gt; field
+                [message] =&gt; The field is required
+                [value] =&gt;
+            )
+    */
+
+}
+</code></pre>
+
+<h2><a name="schema"></a>Schema</h2>
+
+<p>Base class <code>Railken\Amethyst\Schemas\NotificationSenderSchema</code></p>
+
+<p>The schema is used to define the structure of the attributes. All the $attributes in the <a href="#model">model</a> and in the <a href="#manager">manager</a> are initialized by the schema.</p>
+
+<p>You can extends the class like the following example in  <code>app/Schemas/NotificationSenderSchema</code></p>
+
+<pre><code class="php">namespace App\Schemas;
+
+use Railken\Amethyst\Schemas\NotificationSenderSchema as Schema;
+
+class NotificationSenderSchema extends Schema {
+    // ...
+}
+</code></pre>
+
+<p>Remember to update the configuration with new class.</p>
+
+<h2><a name="repository"></a>Repository</h2>
+
+<p>Base class <code>Railken\Amethyst\Repositories\NotificationSenderRepository</code></p>
+
+<p>The repository is the class used to perform queries.</p>
+
+<pre><code class="php">use Railken\Amethyst\Managers\NotificationSenderManager;
+
+$manager = new NotificationSenderManager();
+
+$repository = $manager-&gt;getRepository();
+
+</code></pre>
+
+<p>Retrieving an entity</p>
+
+<pre><code class="php">$repository-&gt;findOneBy(['id' =&gt; 1]);
+$repository-&gt;findOneById(1);
+</code></pre>
+
+<p>Retrieving all entities</p>
+
+<pre><code class="php">$repository-&gt;findAll();
+</code></pre>
+
+<p>Performing a query using \Illuminate\DataBase\Eloquent\Builder</p>
+
+<pre><code class="php">$repository-&gt;newQuery()-&gt;where('id', 1)-&gt;first();
+</code></pre>
+
+<p>You can extends the class like the following example in <code>app/Repositories/NotificationSenderRepository</code></p>
+
+<pre><code class="php">namespace App\Repositories;
+
+use Railken\Amethyst\Repositories\NotificationSenderRepository as Repository;
+
+class NotificationSenderRepository extends Repository {
+    // ...
+}
+</code></pre>
+
+<p>Remember to update the configuration with new class.</p>
+
+<h2><a name="serializer"></a>Serializer</h2>
+
+<p>Base class <code>Railken\Amethyst\Serializers\NotificationSenderSerializer</code></p>
+
+<p>The serializer is used to serialize an entity, you can retrieve it from the data.</p>
+
+<pre><code class="php">use Railken\Amethyst\Managers\NotificationSenderManager;
+
+$manager = new NotificationSenderManager();
+
+$serializer = $manager-&gt;getSerializer();
+</code></pre>
+
+<p>And use it so serialize an entity
+Retrieving an entity</p>
+
+<pre><code class="php">$entity = $repository-&gt;findOneById(1);
+$serializer-&gt;serialize($entity)-&gt;toArray(); // Returns an array
+</code></pre>
+
+<p>You can extends the class like the following example in <code>app/Serializers/NotificationSenderSerializer</code></p>
+
+<pre><code class="php">namespace App\Serializers;
+
+use Railken\Amethyst\Serializers\NotificationSenderSerializer as Serializer;
+
+class NotificationSenderSerializer extends Serializer {
+    // ...
+}
+</code></pre>
+
+<p>Remember to update the configuration with new class.</p>
+
+<h2><a name="faker"></a>Faker</h2>
+
+<p>Base class <code>Railken\Amethyst\Fakers\NotificationSenderFaker</code></p>
+
+<p>The faker can be used for testing or seeding.</p>
+
+<p>Create a new entity using the faker</p>
+
+<pre><code class="php">use Railken\Amethyst\Fakers\NotificationSenderFaker;
+
+$result = $manager-&gt;create(NotificationSenderFaker::make()-&gt;parameters());
+</code></pre>
+
+<p>You can extends the class like the following example in <code>app/Fakers/NotificationSenderFaker</code></p>
+
+<pre><code class="php">namespace App\Fakers;
+
+use Railken\Amethyst\Fakers\NotificationSenderFaker as Faker;
+
+class NotificationSenderFaker extends Faker {
+    // ...
+}
+</code></pre>
+
+<p>Remember to update the configuration with new class.</p>
+
+<h2><a name="permissions"></a>Permissions</h2>
+
+<p>List of all permissions.</p>
+
+<table>
+<thead>
+<tr>
+  <th>Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>notification-sender.create</td>
+</tr>
+<tr>
+  <td>notification-sender.update</td>
+</tr>
+<tr>
+  <td>notification-sender.show</td>
+</tr>
+<tr>
+  <td>notification-sender.remove</td>
+</tr>
+<tr>
+  <td>notification-sender.attributes.id.write</td>
+</tr>
+<tr>
+  <td>notification-sender.attributes.id.read</td>
+</tr>
+<tr>
+  <td>notification-sender.attributes.name.write</td>
+</tr>
+<tr>
+  <td>notification-sender.attributes.name.read</td>
+</tr>
+<tr>
+  <td>notification-sender.attributes.description.write</td>
+</tr>
+<tr>
+  <td>notification-sender.attributes.description.read</td>
+</tr>
+<tr>
+  <td>notification-sender.attributes.title.write</td>
+</tr>
+<tr>
+  <td>notification-sender.attributes.title.read</td>
+</tr>
+<tr>
+  <td>notification-sender.attributes.message.write</td>
+</tr>
+<tr>
+  <td>notification-sender.attributes.message.read</td>
+</tr>
+<tr>
+  <td>notification-sender.attributes.targets.write</td>
+</tr>
+<tr>
+  <td>notification-sender.attributes.targets.read</td>
+</tr>
+<tr>
+  <td>notification-sender.attributes.options.write</td>
+</tr>
+<tr>
+  <td>notification-sender.attributes.options.read</td>
+</tr>
+<tr>
+  <td>notification-sender.attributes.data_builder_id.write</td>
+</tr>
+<tr>
+  <td>notification-sender.attributes.data_builder_id.read</td>
+</tr>
+<tr>
+  <td>notification-sender.attributes.created_at.write</td>
+</tr>
+<tr>
+  <td>notification-sender.attributes.created_at.read</td>
+</tr>
+<tr>
+  <td>notification-sender.attributes.updated_at.write</td>
+</tr>
+<tr>
+  <td>notification-sender.attributes.updated_at.read</td>
+</tr>
+<tr>
+  <td>notification-sender.attributes.deleted_at.write</td>
+</tr>
+<tr>
+  <td>notification-sender.attributes.deleted_at.read</td>
+</tr>
+</tbody>
+</table>
+
+<h2><a name="errors"></a>Errors</h2>
+
+<p>List of all errors.</p>
+
+<table>
+<thead>
+<tr>
+  <th>Code</th>
+  <th>Message</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>NOTIFICATION-SENDER_NAME_NOT_DEFINED</td>
+  <td>The NAME is required</td>
+</tr>
+<tr>
+  <td>NOTIFICATION-SENDER_NAME_NOT_VALID</td>
+  <td>The NAME is not valid</td>
+</tr>
+<tr>
+  <td>NOTIFICATION-SENDER_NAME_NOT_AUTHORIZED</td>
+  <td>You're not authorized, missing NAME permission</td>
+</tr>
+<tr>
+  <td>NOTIFICATION-SENDER_NAME_NOT_UNIQUE</td>
+  <td>The NAME is not unique</td>
+</tr>
+<tr>
+  <td>NOTIFICATION-SENDER_DESCRIPTION_NOT_VALID</td>
+  <td>The DESCRIPTION is not valid</td>
+</tr>
+<tr>
+  <td>NOTIFICATION-SENDER_DESCRIPTION_NOT_AUTHORIZED</td>
+  <td>You're not authorized, missing DESCRIPTION permission</td>
+</tr>
+<tr>
+  <td>NOTIFICATION-SENDER_TITLE_NOT_VALID</td>
+  <td>The TITLE is not valid</td>
+</tr>
+<tr>
+  <td>NOTIFICATION-SENDER_TITLE_NOT_AUTHORIZED</td>
+  <td>You're not authorized, missing TITLE permission</td>
+</tr>
+<tr>
+  <td>NOTIFICATION-SENDER_MESSAGE_NOT_VALID</td>
+  <td>The MESSAGE is not valid</td>
+</tr>
+<tr>
+  <td>NOTIFICATION-SENDER_MESSAGE_NOT_AUTHORIZED</td>
+  <td>You're not authorized, missing MESSAGE permission</td>
+</tr>
+<tr>
+  <td>NOTIFICATION-SENDER_TARGETS_NOT_DEFINED</td>
+  <td>The TARGETS is required</td>
+</tr>
+<tr>
+  <td>NOTIFICATION-SENDER_TARGETS_NOT_VALID</td>
+  <td>The TARGETS is not valid</td>
+</tr>
+<tr>
+  <td>NOTIFICATION-SENDER_TARGETS_NOT_AUTHORIZED</td>
+  <td>You're not authorized, missing TARGETS permission</td>
+</tr>
+<tr>
+  <td>NOTIFICATION-SENDER_OPTIONS_NOT_VALID</td>
+  <td>The OPTIONS is not valid</td>
+</tr>
+<tr>
+  <td>NOTIFICATION-SENDER_OPTIONS_NOT_AUTHORIZED</td>
+  <td>You're not authorized, missing OPTIONS permission</td>
+</tr>
+<tr>
+  <td>NOTIFICATION-SENDER_DATA_BUILDER_ID_NOT_VALID</td>
+  <td>The DATA_BUILDER_ID is not valid</td>
+</tr>
+<tr>
+  <td>NOTIFICATION-SENDER_DATA_BUILDER_ID_NOT_AUTHORIZED</td>
+  <td>You're not authorized, missing DATA_BUILDER_ID permission</td>
+</tr>
+</tbody>
+</table>
+
+<p><a href="../../index.html">Back</a></p>
+
+      </div>
+    </div>
+  </main>
+</body>
+</html>

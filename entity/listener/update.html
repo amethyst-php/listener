@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base href="/amethyst-listener/">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link href="https://fonts.googleapis.com/css?family=Roboto|Rubik|Open Sans" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <script src='https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js'></script>
+  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+  <link href='style.css' rel='stylesheet'>
+</head>
+<body>
+  <header>
+    <a class="btn purple">Switch to frontend docs</a>
+  </header>
+  <main>
+    <div class="sidebar" style='display: flex'>
+      <div style='flex-grow: 1'>
+      </div>
+      <div class="navigation">
+        <ul>
+          <li><a href=''>Introduction</a></li>
+                    <li><a href='entity/work/'>work</a></li>
+                    <li><a href='entity/email-sender/'>email-sender</a></li>
+                    <li><a href='entity/data-builder/'>data-builder</a></li>
+                    <li><a href='entity/template/'>template</a></li>
+                    <li><a href='entity/file/'>file</a></li>
+                    <li><a href='entity/file-generator/'>file-generator</a></li>
+                    <li><a href='entity/notification-sender/'>notification-sender</a></li>
+                    <li><a href='entity/notification/'>notification</a></li>
+                    <li><a href='entity/user/'>user</a></li>
+                    <li><a href='entity/listener/'>listener</a></li>
+                  </ul>
+      </div>
+    </div>
+    <div class="container">
+      <div class="content">
+        <h2>Update</h2>
+
+<p>Define a new instance of the <a href="manager.html">Manager</a></p>
+
+<pre><code class="php">use Railken\Amethyst\Managers\ListenerManager;
+
+$manager = new ListenerManager();
+</code></pre>
+
+<p>Retrieve an <a href="model.html">entity</a> using the <a href="repository.html">repository</a></p>
+
+<pre><code class="php">$entity = $manager-&gt;getRepository()-&gt;findOneById(1);
+</code></pre>
+
+<p>Update an existent <a href="model.html">entity</a></p>
+
+<pre><code class="php">$params = [
+    "name" =&gt; "El. psy. congroo. 1562549199.5955",
+    "condition" =&gt; "{{ message is not empty ? 1 : 0 }}",
+    "work" =&gt; [
+        "name" =&gt; "Dr. Kaylie Homenick",
+        "payload" =&gt; "class: Railken\\Amethyst\\Workers\\EmailWorker\ndata:\n    id: 1\n",
+        "description" =&gt; "Eaque et facilis nihil sit quisquam. At ad fugiat et eligendi ad. Illum qui voluptatibus omnis sed odit quo id.",
+        "data_builder" =&gt; [
+            "name" =&gt; "Aniya Jerde",
+            "description" =&gt; "Distinctio voluptatum quisquam odio tenetur qui fugiat voluptas. Quam nam rerum doloremque nulla. Sapiente dolorum voluptates enim rerum aliquam repellendus.",
+            "class_name" =&gt; "Railken\\Amethyst\\DataBuilders\\CommonDataBuilder",
+            "class_arguments" =&gt; "- Railken\\Amethyst\\Managers\\DataBuilderManager\n",
+            "filter" =&gt; "id eq 1",
+            "input" =&gt; "date:\n    type: date\n    validation: 'date_format:Y-m-d'\n",
+            "mock_data" =&gt; "date: '2018-01-01'\n",
+            "include" =&gt; "bar",
+            "data_builder" =&gt; [
+                "class_name" =&gt; "Railken\\Amethyst\\DataBuilders\\DummyDataBuilder"
+            ]
+        ],
+        "data" =&gt; "id: '{{ record.id }}'\n"
+    ],
+    "data" =&gt; "dummy1: dummy2\n",
+    "event_class" =&gt; "Dummy"
+];
+
+$result = $manager-&gt;update($params);
+</code></pre>
+
+<ul>
+<li><a href="attributes.html">Attributes</a></li>
+<li><a href="errors.html">Errors</a></li>
+<li><a href="repository.html">Performing queries with the Repository</a></li>
+<li><a href="result.html">Handle the result</a></li>
+</ul>
+
+<hr />
+
+<p><a href="index.html">Back</a></p>
+
+      </div>
+    </div>
+  </main>
+</body>
+</html>
