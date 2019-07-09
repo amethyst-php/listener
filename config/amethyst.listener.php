@@ -13,14 +13,14 @@ return [
         'listener' => [
             'table'      => 'amethyst_listeners',
             'comment'    => 'Listener',
-            'model'      => Railken\Amethyst\Models\Listener::class,
-            'schema'     => Railken\Amethyst\Schemas\ListenerSchema::class,
-            'repository' => Railken\Amethyst\Repositories\ListenerRepository::class,
-            'serializer' => Railken\Amethyst\Serializers\ListenerSerializer::class,
-            'validator'  => Railken\Amethyst\Validators\ListenerValidator::class,
-            'authorizer' => Railken\Amethyst\Authorizers\ListenerAuthorizer::class,
-            'faker'      => Railken\Amethyst\Fakers\ListenerFaker::class,
-            'manager'    => Railken\Amethyst\Managers\ListenerManager::class,
+            'model'      => Amethyst\Models\Listener::class,
+            'schema'     => Amethyst\Schemas\ListenerSchema::class,
+            'repository' => Amethyst\Repositories\ListenerRepository::class,
+            'serializer' => Amethyst\Serializers\ListenerSerializer::class,
+            'validator'  => Amethyst\Validators\ListenerValidator::class,
+            'authorizer' => Amethyst\Authorizers\ListenerAuthorizer::class,
+            'faker'      => Amethyst\Fakers\ListenerFaker::class,
+            'manager'    => Amethyst\Managers\ListenerManager::class,
         ],
     ],
 
@@ -36,7 +36,7 @@ return [
         'admin' => [
             'listener' => [
                 'enabled'    => true,
-                'controller' => Railken\Amethyst\Http\Controllers\Admin\ListenersController::class,
+                'controller' => Amethyst\Http\Controllers\Admin\ListenersController::class,
                 'router'     => [
                     'as'     => 'listener.',
                     'prefix' => '/listeners',

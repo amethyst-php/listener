@@ -1,8 +1,8 @@
 <?php
 
-namespace Railken\Amethyst\Managers;
+namespace Amethyst\Managers;
 
-use Railken\Amethyst\Common\ConfigurableManager;
+use Amethyst\Common\ConfigurableManager;
 use Railken\Lem\Manager;
 
 class ListenerManager extends Manager
@@ -21,7 +21,7 @@ class ListenerManager extends Manager
      */
     public function getAvailableEventClasses()
     {
-        /** @var \Railken\Amethyst\Repositories\ListenerRepository */
+        /** @var \Amethyst\Repositories\ListenerRepository */
         $repository = $this->getRepository();
 
         return $repository->newQuery()->get()->map(function ($v) {

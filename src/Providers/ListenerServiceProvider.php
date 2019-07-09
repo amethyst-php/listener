@@ -1,14 +1,14 @@
 <?php
 
-namespace Railken\Amethyst\Providers;
+namespace Amethyst\Providers;
 
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Schema;
-use Railken\Amethyst\Common\CommonServiceProvider;
-use Railken\Amethyst\Managers\ListenerManager;
-use Railken\Amethyst\Managers\TemplateManager;
-use Railken\Amethyst\Managers\WorkManager;
+use Amethyst\Common\CommonServiceProvider;
+use Amethyst\Managers\ListenerManager;
+use Amethyst\Managers\TemplateManager;
+use Amethyst\Managers\WorkManager;
 use Symfony\Component\Yaml\Yaml;
 
 class ListenerServiceProvider extends CommonServiceProvider
@@ -34,7 +34,7 @@ class ListenerServiceProvider extends CommonServiceProvider
                 $wm = new WorkManager();
                 $tm = new TemplateManager();
 
-                /** @var \Railken\Amethyst\Repositories\ListenerRepository */
+                /** @var \Amethyst\Repositories\ListenerRepository */
                 $repository = $lm->getRepository();
 
                 $listeners = $repository->findByEventClass($event_name);
@@ -61,7 +61,7 @@ class ListenerServiceProvider extends CommonServiceProvider
      */
     public function register()
     {
-        $this->app->register(\Railken\Amethyst\Providers\WorkServiceProvider::class);
+        $this->app->register(\Amethyst\Providers\WorkServiceProvider::class);
 
         parent::register();
     }

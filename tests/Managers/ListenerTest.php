@@ -1,14 +1,14 @@
 <?php
 
-namespace Railken\Amethyst\Tests\Managers;
+namespace Amethyst\Tests\Managers;
 
-use Railken\Amethyst\Fakers\EmailSenderFaker;
-use Railken\Amethyst\Fakers\ListenerFaker;
-use Railken\Amethyst\Managers\EmailSenderManager;
-use Railken\Amethyst\Managers\ListenerManager;
-use Railken\Amethyst\Providers\ListenerServiceProvider;
-use Railken\Amethyst\Tests\BaseTest;
-use Railken\Amethyst\Tests\Events\DummyEvent;
+use Amethyst\Fakers\EmailSenderFaker;
+use Amethyst\Fakers\ListenerFaker;
+use Amethyst\Managers\EmailSenderManager;
+use Amethyst\Managers\ListenerManager;
+use Amethyst\Providers\ListenerServiceProvider;
+use Amethyst\Tests\BaseTest;
+use Amethyst\Tests\Events\DummyEvent;
 use Railken\Lem\Support\Testing\TestableBaseTrait;
 use Symfony\Component\Yaml\Yaml;
 

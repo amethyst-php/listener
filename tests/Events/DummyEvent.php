@@ -1,6 +1,6 @@
 <?php
 
-namespace Railken\Amethyst\Tests\Events;
+namespace Amethyst\Tests\Events;
 
 use Illuminate\Queue\SerializesModels;
 
