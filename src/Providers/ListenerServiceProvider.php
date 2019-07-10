@@ -2,13 +2,13 @@
 
 namespace Amethyst\Providers;
 
-use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\Event;
-use Illuminate\Support\Facades\Schema;
 use Amethyst\Common\CommonServiceProvider;
 use Amethyst\Managers\ListenerManager;
 use Amethyst\Managers\TemplateManager;
 use Amethyst\Managers\WorkManager;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Schema;
 use Symfony\Component\Yaml\Yaml;
 
 class ListenerServiceProvider extends CommonServiceProvider
