@@ -6,12 +6,12 @@ use Amethyst\Common\ConfigurableManager;
 use Railken\Lem\Manager;
 
 /**
- * @method \Amethyst\Models\Listener newEntity()
- * @method \Amethyst\Schemas\ListenerSchema getSchema()
+ * @method \Amethyst\Models\Listener                 newEntity()
+ * @method \Amethyst\Schemas\ListenerSchema          getSchema()
  * @method \Amethyst\Repositories\ListenerRepository getRepository()
- * @method \Amethyst\Serializers\ListenerSerializer getSerializer()
- * @method \Amethyst\Validators\ListenerValidator getValidator()
- * @method \Amethyst\Authorizers\ListenerAuthorizer getAuthorizer()
+ * @method \Amethyst\Serializers\ListenerSerializer  getSerializer()
+ * @method \Amethyst\Validators\ListenerValidator    getValidator()
+ * @method \Amethyst\Authorizers\ListenerAuthorizer  getAuthorizer()
  */
 class ListenerManager extends Manager
 {
