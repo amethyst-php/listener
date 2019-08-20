@@ -6,6 +6,7 @@ use Amethyst\Common\CommonServiceProvider;
 use Amethyst\Managers\ListenerManager;
 use Amethyst\Managers\TemplateManager;
 use Amethyst\Managers\WorkManager;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Schema;
@@ -19,6 +20,12 @@ class ListenerServiceProvider extends CommonServiceProvider
     public function boot()
     {
         parent::boot();
+
+        try {
+            DB::connection()->getPdo();
+        } catch (\Exception $e) {
+            return;
+        }
 
         if (Schema::hasTable(Config::get('amethyst.listener.data.listener.table'))) {
             $lm = new ListenerManager();
