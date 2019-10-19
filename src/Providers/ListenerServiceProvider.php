@@ -57,8 +57,6 @@ class ListenerServiceProvider extends CommonServiceProvider
                         }
                     }
                 }
-
-                return false;
             });
         }
     }
