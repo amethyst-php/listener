@@ -2,7 +2,7 @@
 
 namespace Amethyst\Providers;
 
-use Amethyst\Common\CommonServiceProvider;
+use Amethyst\Core\Providers\CommonServiceProvider;
 use Amethyst\Managers\ListenerManager;
 use Amethyst\Managers\TemplateManager;
 use Amethyst\Managers\WorkManager;

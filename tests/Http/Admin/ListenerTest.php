@@ -2,7 +2,7 @@
 
 namespace Amethyst\Tests\Http\Admin;
 
-use Amethyst\Api\Support\Testing\TestableBaseTrait;
+use Amethyst\Core\Support\Testing\TestableBaseTrait;
 use Amethyst\Fakers\ListenerFaker;
 use Amethyst\Tests\BaseTest;
 
