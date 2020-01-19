@@ -1,6 +1,6 @@
 # amethyst-listener
 
-[![Build Status](https://travis-ci.org/amethyst-php/listener.svg?branch=master)](https://travis-ci.org/amethyst-php/listener)
+[![Action Status](https://github.com/amethyst-php/listener/workflows/test/badge.svg)](https://github.com/amethyst-php/listener/actions)
 
 [Amethyst](https://github.com/amethyst-php/amethyst) package.
 
