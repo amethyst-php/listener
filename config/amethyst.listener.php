@@ -26,27 +26,6 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Http configuration
-    |--------------------------------------------------------------------------
-    |
-    | Here you may configure the routes
-    |
-    */
-    'http' => [
-        'admin' => [
-            'listener' => [
-                'enabled'    => true,
-                'controller' => Amethyst\Http\Controllers\Admin\ListenersController::class,
-                'router'     => [
-                    'as'     => 'listener.',
-                    'prefix' => '/listeners',
-                ],
-            ],
-        ],
-    ],
-
-    /*
-    |--------------------------------------------------------------------------
     | Events Listener
     |--------------------------------------------------------------------------
     |
